@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/path-nav/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Unit 4: Unix Directory Structure and Navigation - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../cheat-sheet/">Jun Xiong's CheatSheet</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/path-nav.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#unit-4-unix-directory-structure-and-navigation">Unit 4: Unix Directory Structure and Navigation</a></li>
+            <li class="second-level"><a href="#unix-directory">Unix Directory</a></li>
+                
+                <li class="third-level"><a href="#root-directory">Root Directory</a></li>
+                <li class="third-level"><a href="#home-directory">Home Directory</a></li>
+                <li class="third-level"><a href="#current-working-directory">Current Working Directory</a></li>
+                <li class="third-level"><a href="#parent-directory">Parent Directory</a></li>
+            <li class="second-level"><a href="#specifying-a-path">Specifying a Path</a></li>
+                
+                <li class="third-level"><a href="#absolute-path">Absolute path</a></li>
+                <li class="third-level"><a href="#relative-path">Relative path</a></li>
+            <li class="second-level"><a href="#directory-related-commands">Directory-related Commands</a></li>
+                
+                <li class="third-level"><a href="#pwd-print-current-working-directory">pwd: Print Current Working directory</a></li>
+                <li class="third-level"><a href="#ls-list-content-of-a-directory">ls: LiSt content of a directory</a></li>
+                <li class="third-level"><a href="#mkdir-make-a-subdirectory">mkdir: MaKe a subDIRectory</a></li>
+                <li class="third-level"><a href="#cd-change-directory">cd: Change Directory</a></li>
+                <li class="third-level"><a href="#rmdir-remove-a-subdirectory">rmdir: ReMove a subDIRectory</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="unit-4-unix-directory-structure-and-navigation">Unit 4: Unix Directory Structure and Navigation</h1>
+<h2 id="unix-directory">Unix Directory</h2>
+<p>Unix organizes files according to a directory structure.  The following shows an example.</p>
+<p><img alt="Unix Directory Tree" src="../figures/unix-dir-tree.png" /></p>
+<p>This structure is also known as a <em>directory tree</em>.</p>
+<p>There are two important directories that you need to know.</p>
+<h3 id="root-directory">Root Directory</h3>
+<p>The root directory is the directory at the top of the directory tree<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>. It is simply referred to as <code>/</code>, without any name.  Under the root directory are many other systems directory, which a casual user does not normally need to (and have no permission to) modify.</p>
+<h3 id="home-directory">Home Directory</h3>
+<p>Each user has his/her own <em>home</em> directory.
+The above figure shows where the home directory of the user <code>ooiwt</code> resides in the directory tree. The user <code>ooiwt</code> may create files or directories in his/her home directory, but not elsewhere unless permission is given.</p>
+<p>The home directory is referred to with the symbol <code>~</code> in <code>bash</code>.  Sometimes we add the username behind <code>~</code> to indicate the home directory of the other user. E.g., <code>~bob</code> means the home directory of a user named <code>bob</code>.</p>
+<h3 id="current-working-directory">Current Working Directory</h3>
+<p>A user can navigate around the directory tree.  The <em>current working directory</em> is the directory that the user is currently in.  In contrast to the root and home directory, which are fixed<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>, the current working directory changes as the user moves around.  Knowing the current working directory is important since this is the default location in the directory tree a command executes.  As such, many systems by default display the current working directory as part of the <code>bash</code> command prompt.</p>
+<p>The current working directory is referred to with the symbol <code>.</code> in <code>bash</code>.</p>
+<h3 id="parent-directory">Parent Directory</h3>
+<p>The <em>parent directory</em> is directory one layer up from the current directory.</p>
+<p>The parent directory is referred to with the symbol <code>..</code> in <code>bash</code>.</p>
+<p>To summarize, here are the short form representations:</p>
+<table>
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/</code></td>
+<td>the root directory</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>the home directory</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>the current working directory</td>
+</tr>
+<tr>
+<td><code>..</code></td>
+<td>the parent directory</td>
+</tr>
+</tbody>
+</table>
+<h2 id="specifying-a-path">Specifying a Path</h2>
+<p>To specify a directory or a file in the Unix directory tree, we can use either the <em>absolute path</em> or the <em>relative path</em>.</p>
+<h3 id="absolute-path">Absolute path</h3>
+<p>The absolute path is constructed as follows, starting from the root of the directory structure, find a path (a sequence of directories) to the location that you want to specify, then concatenate the names of the directories together, separated by the forward-slash <code>/</code>.  This is a similar notation used for Web site URLs so you should already be familiar with it.  For instance, the path
+<code>/home/o/ooiwt</code> is the absolute path of the directory named <code>ooiwt</code> in the figure above.</p>
+<p>An absolute path is independent of the current working directory and always start with <code>/</code> or <code>~</code></p>
+<h3 id="relative-path">Relative path</h3>
+<p>The relative path is dependent on the current working directory.  To refer to another location, start from the current directory, and find a path (a sequence of directories) to the location that you refer to.  When we go up a tree, we use <code>..</code> to represent the directory.</p>
+<p>For example, referring to the figure above, if we are in the directory <code>/home/b</code>, and we wish to refer to <code>/home/o/ooiwt</code>, we can use the relative path <code>../o/ooiwt</code>.  If we wish to refer to <code>/home/b/bob</code>, we can use the relative path <code>bob</code>.</p>
+<p>A relative path never starts with <code>/</code>.</p>
+<h2 id="directory-related-commands">Directory-related Commands</h2>
+<p>Now, let's take a look at some basic commands available in <code>bash</code> that
+deals with navigation and directories.</p>
+<h3 id="pwd-print-current-working-directory"><code>pwd</code>: Print Current Working directory</h3>
+<p><code>pwd</code> shows you which directory you are currently in.<br />
+Type <code>pwd</code> into the command prompt, and it will print the absolute path to your current working directory. For instance,
+Suppose you are in <code>/home/o/ooiwt</code>, entering
+<pre class="highlight"><code class="language-Bash">pwd</code></pre>
+will give the output
+<pre class="highlight"><code class="language-Bash">/home/o/ooiwt</code></pre></p>
+<h3 id="ls-list-content-of-a-directory"><code>ls</code>: LiSt content of a directory</h3>
+<p>The <code>ls</code> list the content in the current working directory.</p>
+<div class="admonition note">
+<p class="admonition-title">Rule of Silence</p>
+<p>Unix follows the economical <em>rule of silence</em>: programs should not print unnecessary output, to allow other programs and users to easily parse the output from one program.  So, if <code>ls</code> has nothing to list, it will list nothing (as opposed to, say, printing "This is an empty directory.")</p>
+</div>
+<h3 id="mkdir-make-a-subdirectory"><code>mkdir</code>: MaKe a subDIRectory</h3>
+<p>The <code>mkdir</code> command creates a subdirectory with the given name in the current directory.</p>
+<p>In the example below, we assume that we start with an empty directory.  </p>
+<pre class="highlight"><code class="language-bash">$ ls
+$ mkdir workshop
+$ ls
+workshop
+$ ls -F
+workshop/</code></pre>
+<p>Here, we create a directory called <code>workshop</code>.  Now, when we <code>ls</code>, you can see the directory listed.  </p>
+<p>You may also use <code>ls -F</code> for more information (<code>-F</code> is one of the many <em>options</em>/<em>flags</em> available for the <code>ls</code> command. To see a complete list of the options, refer to the man pages, i.e., <code>man ls</code>.)</p>
+<p>The slash <code>/</code> beside the filename tells you that the file is a directory.  A normal file does not have a slash beside its name when "ls -F" is used.</p>
+<p>You may also use the <code>ls -l</code> command (hyphen el, not hyphen one) to display almost all the file information, include the size of the file and the date of modification.</p>
+<div class="admonition tip">
+<p class="admonition-title">Use Up Arrow for Command History</p>
+<p><code>bash</code> maintains a history of your previously executed commands, and you may use the <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-p">P</kbd></span> (previous) and <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-n">N</kbd></span> (next) to </p>
+</div>
+<p>go through it. Press the <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-p">P</kbd></span> until you find a previously executed command. You may then press <span class="keys"><kbd class="key-enter">Enter</kbd></span> to execute it or edit the command before executing it. This is handy when you need to repeatedly execute a long <code>bash</code> command.</p>
+<h3 id="cd-change-directory"><code>cd</code>: Change Directory</h3>
+<p>To navigate in the directory tree, changing the current working directory from one to another, we use the <code>cd</code> command.</p>
+<pre class="highlight"><code class="language-Bash">$ pwd
+/home/o/ooiwt
+$ cd workshop
+$ pwd
+/home/o/ooiwt/workshop</code></pre>
+<p>Suppose our starting working directory is <code>/home/o/ooiwt</code>, after we <code>cd</code> into <code>workshop</code>, the current working directory becomes <code>/home/o/ooiwt/workshop</code>.  Note that <code>cd</code> can take in either an absolute path or a relative path.  The example above takes in a relative path as the argument.</p>
+<p>As mentioned in the <a href="../shell/">Introduction to Shell</a> unit, it is common to include the current working directory into the shell's prompt.  So, you may see your command prompt updated to include the new working directory.</p>
+<p>Entering <code>cd</code> alone (without argument) brings you back to your home directory.  </p>
+<h3 id="rmdir-remove-a-subdirectory"><code>rmdir</code>: ReMove a subDIRectory</h3>
+<p><code>rmdir</code> removes a subDIRectory in the current directory -- note that a directory must be empty before it can be removed.</p>
+<p>The command
+<pre class="highlight"><code>$ rmdir workshop</code></pre>
+will remove the directory that you just created.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>In computing, trees are upside down with the root at the top and leaves at the bottom!&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p>Not exactly true -- since Unix is designed to be flexible, even the root and the home directory can be changed!  But let's not worry about that for now since there is no good reason to do that as a beginner.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

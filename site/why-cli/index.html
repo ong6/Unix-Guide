@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/why-cli/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Unit 2: Command-Line Interfaces - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../cheat-sheet/">Jun Xiong's CheatSheet</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/why-cli.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#unit-2-command-line-interfaces">Unit 2: Command-Line Interfaces</a></li>
+            <li class="second-level"><a href="#what-is-command-line-interfaces">What is Command-Line Interfaces?</a></li>
+                
+            <li class="second-level"><a href="#why-cli-over-gui">Why CLI over GUI?</a></li>
+                
+            <li class="second-level"><a href="#references">References</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="unit-2-command-line-interfaces">Unit 2: Command-Line Interfaces</h1>
+<h2 id="what-is-command-line-interfaces">What is Command-Line Interfaces?</h2>
+<p>The command-line interfaces, or just CLI for short, is an important 
+interface that we, as computing professionals, interact with 
+the computer for most of our day-to-day tasks.</p>
+<p>In contrast to graphical user interfaces where users use a mouse to
+click/drag on menus and windows to interact with a computer, the
+command-line interface uses keyboard and text.  The users would type
+a command to instruct the computer to do something, and the computer
+would respond by displaying the reply to the user.</p>
+<p>CLI evolves from teletypes machines where users would interact with
+the computer through a typewriter-like machine (see Figure 2.2. of
+this article for an example).  Users would type a command on the 
+keyboard, and the typewriter would print out, line-by-line, the output
+on a piece of paper.  This is the era before monitors and mice. 
+Again, driven by the constraints and the necessity, CLI interfaces
+are designed to be simple and economical.  <em>The commands are short and
+fast to type; the responses are succinct.</em></p>
+<p><br><div align="center">
+<a title="Bubba73 (Jud McCranie) / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:ASR_33.jpg"><img width="256" alt="ASR 33" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ASR_33.jpg/256px-ASR_33.jpg"></a>
+<br>Figure: A teletype device (Model 33 ASR) to interact with a computer.
+</div><br></p>
+<h2 id="why-cli-over-gui">Why CLI over GUI?</h2>
+<p>Since CLI is designed to be economical, CLI is much more efficient
+and productive to use, in particular when we are interacting with
+a remote computer over the network -- sending text back and forth
+is much more efficient than sending graphical elements over the
+network.  Each character takes up to two bytes, but each pixel alone
+takes up 3 bytes of data.</p>
+<p>Another reason why using CLI is faster and more productive is that
+user can keep their hands on the keyboard at all time and <em>not
+needing to switch frequently between keyboard and mouse.</em>  While
+research has shown that GUI and mouse are great for casual users,
+for software developers that need to type on the keyboard most of
+the time, having to switch between keyboard and mouse is a
+productivity-killer.</p>
+<p>Further, CLI commands typically provides a host of options that is
+accessible directly (including of clicking through preference dialogues)
+from the command line, making these commands flexible and customizable.</p>
+<p>Finally, since these commands are just text, we can put together a
+sequence of commands easily as a <em>script</em>, to automate highly repetitive
+tasks.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="http://www.catb.org/~esr/writings/taouu/taouu.html#id3017631">The Art of Unix Usability: Command Line Interfaces</a>, by Eric Steven Raymond</li>
+</ul></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

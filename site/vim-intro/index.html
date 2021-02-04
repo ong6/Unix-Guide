@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/vim-intro/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Vim intro - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../cheat-sheet/">Jun Xiong's CheatSheet</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/vim-intro.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#unit-11-terminal-based-editor-vim">Unit 11: Terminal-based Editor: vim</a></li>
+            <li class="second-level"><a href="#1-minimizing-hand-movements">1. Minimizing Hand Movements</a></li>
+                
+            <li class="second-level"><a href="#2-multi-modal-editor">2. Multi-modal Editor</a></li>
+                
+            <li class="second-level"><a href="#3-tell-vim-what-you-want-to-do-dont-do-it-yourself">3. Tell vim What You Want To Do; Don't Do It Yourself</a></li>
+                
+            <li class="second-level"><a href="#4-be-a-good-unix-citizen">4. Be A Good Unix Citizen</a></li>
+                
+        <li class="first-level "><a href="#other-reasons-to-learn-vim">Other Reasons To Learn vim</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h2 id="unit-11-terminal-based-editor-vim">Unit 11: Terminal-based Editor: <code>vim</code></h2>
+<p>The above examples show us how we can create a simple, one-line, shell script.  Shell scripts can be fairly complex -- <code>bash</code> supports a
+full-blown programming language.  </p>
+<p>To edit shell scripts, programs, or text files, we need a proper editor.  Remember that we want to keep our hands on the keyboard and keep ourselves "in the zone" with only the terminal, the keyboard, and ourselves, so we will use a terminal-based editor: no windows, no mouse, no arrow keys, no function keys.  </p>
+<p>There are only two respectable, widely available text editors in Unix -- <code>vim</code> and <code>emacs</code>, which one is better has been an ongoing religious war, but for us in SoC, we use <code>vim</code>.</p>
+<p>You will get to practice using <code>vim</code> in the next session, but for a start, I will go through the key ideas of <code>vim</code>.</p>
+<h3 id="1-minimizing-hand-movements">1. Minimizing Hand Movements</h3>
+<p><code>vim</code>, like the shell, aims to minimize hand movements.  Frequently used commands are positioned in convenient places on the keyboard.  Let me give you a few examples.</p>
+<ul>
+<li>
+<p>To exit vim, type <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-z">Z</kbd><span>+</span><kbd class="key-z">Z</kbd></span>.  Notice that this is located at the bottom left corner of your keyboard.  For normal typing, your left hand is supposed to be placed over the keys <span class="keys"><kbd class="key-a">A</kbd></span> <span class="keys"><kbd class="key-s">S</kbd></span> <span class="keys"><kbd class="key-d">D</kbd></span> <span class="keys"><kbd class="key-f">F</kbd></span>, so you just need move slightly your left pinky to <span class="keys"><kbd class="key-shift">Shift</kbd></span> and left ring finger to <span class="keys"><kbd class="key-z">Z</kbd></span> and hit them.</p>
+</li>
+<li>
+<p>To move the cursor, instead of using the arrow keys, <code>vim</code> uses <span class="keys"><kbd class="key-h">H</kbd></span> to move left, <span class="keys"><kbd class="key-l">L</kbd></span> to move right, <span class="keys"><kbd class="key-j">J</kbd></span> to move down, and <span class="keys"><kbd class="key-k">K</kbd></span> to move up.  For normal typing, you right hand is supposed to be placed on <span class="keys"><kbd class="key-j">J</kbd></span> <span class="keys"><kbd class="key-k">K</kbd></span> <span class="keys"><kbd class="key-l">L</kbd></span> <span class="keys"><kbd class="key-semicolon">;</kbd></span>, so these arrow keys alternatives are located very near to where your right hand should be!</p>
+</li>
+</ul>
+<p>I have a few more things to say about using <span class="keys"><kbd class="key-h">H</kbd></span> <span class="keys"><kbd class="key-j">J</kbd></span> <span class="keys"><kbd class="key-k">K</kbd></span> <span class="keys"><kbd class="key-l">L</kbd></span> to replace the arrow keys:</p>
+<ul>
+<li>
+<p>It is not uncommon for applications to re-map other keys for movement.  Many first-person shooting games uses <span class="keys"><kbd class="key-w">W</kbd></span> <span class="keys"><kbd class="key-a">A</kbd></span> <span class="keys"><kbd class="key-s">S</kbd></span> <span class="keys"><kbd class="key-d">D</kbd></span> for movement, for the same reason as <code>vim</code> -- it is close to the resting position of the left hand on the keyboard.</p>
+</li>
+<li>
+<p>The use of <span class="keys"><kbd class="key-h">H</kbd></span> <span class="keys"><kbd class="key-j">J</kbd></span> <span class="keys"><kbd class="key-k">K</kbd></span> <span class="keys"><kbd class="key-l">L</kbd></span> for movement is more ubiquitous than you think.  In the Web-version of Facebook and Reddit, for instance, you can use <span class="keys"><kbd class="key-j">J</kbd></span> and <span class="keys"><kbd class="key-k">K</kbd></span> to move up and down across posts.  On this website, you can use <span class="keys"><kbd class="key-h">H</kbd></span> and <span class="keys"><kbd class="key-l">L</kbd></span> to go to the previous page and the next page respectively.</p>
+</li>
+</ul>
+<h3 id="2-multi-modal-editor">2. Multi-modal Editor</h3>
+<p><code>vim</code> is a multi-modal editor.  While for most other editors makes no distinction between reading and editing, <code>vim</code> makes an explicit distinction between the two.  <code>vim</code> has two basic modes:</p>
+<ul>
+<li><code>NORMAL</code> mode: where you read, navigate and manipulate the text.</li>
+<li><code>INSERT</code> mode: where you insert the text</li>
+</ul>
+<p>As a programmer, having a different <code>NORMAL</code> modes makes sense since we spend much time reading and navigating around source code.  Thus, allowing the editing commands to optimized.</p>
+<p>In the <code>NORMAL</code> mode, you can use any of these keys <span class="keys"><kbd class="key-i">I</kbd></span> <span class="keys"><kbd class="key-s">S</kbd></span> <span class="keys"><kbd class="key-a">A</kbd></span> <span class="keys"><kbd class="key-o">O</kbd></span> (with or without <span class="keys"><kbd class="key-shift">Shift</kbd></span>) to switch to <code>INSERT</code> mode.  To go back to <code>NORMAL</code> mode, press <span class="keys"><kbd class="key-escape">Esc</kbd></span>.  The keys <span class="keys"><kbd class="key-i">I</kbd></span> <span class="keys"><kbd class="key-s">S</kbd></span> <span class="keys"><kbd class="key-a">A</kbd></span> <span class="keys"><kbd class="key-o">O</kbd></span> have different meanings, which you will learn later.  </p>
+<p>Note that most of the time you will be in <code>NORMAL</code> mode.  So a habitual <code>vim</code> users would insert some text and immediately switch back to normal mode by hitting <span class="keys"><kbd class="key-escape">Esc</kbd></span>.</p>
+<h3 id="3-tell-vim-what-you-want-to-do-dont-do-it-yourself">3. Tell <code>vim</code> What You Want To Do; Don't Do It Yourself</h3>
+<p>In <code>NORMAL</code> mode, you can manipulate text in <code>vim</code> by issuing commands to <code>vim</code>.  These commands are like a programming language.  It is also not unlike the Unix commands, in that each command does a small thing but can be composed together to perform complex text manipulation.</p>
+<p>Let me give an example here.  Suppose you have a sentence:</p>
+<pre class="highlight"><code>Wherever there is light, there is also a shadow.</code></pre>
+<p>You want to remove <code>also a</code> from the sentence.  </p>
+<p>What would you do in a typical text editor?  You can use move your hand away from the keyboard, find your mouse, move your mouse cursor to highlight the text, and then hit <span class="keys"><kbd class="key-delete">Del</kbd></span>.  Or you could move the cursor (by mouse or by repeatedly hitting the keyboard) to place the cursor after <code>a</code>, and then press <span class="keys"><kbd class="key-delete">Del</kbd></span> six times.</p>
+<p>In addition to being tedious, this is error-prone.  You might highlight one additional or one less space, or hit <span class="keys"><kbd class="key-delete">Del</kbd></span> one too many times.</p>
+<p>What we are used to do is to perform the action of deleting the words ourselves.  For <code>vim</code>, we do it differently.  We need to look for the word <code>also</code> and delete two words.  This translate to the command <span class="keys"><kbd class="key-slash">/</kbd></span> <span class="keys"><kbd class="key-a">A</kbd></span> <span class="keys"><kbd class="key-l">L</kbd></span> <span class="keys"><kbd class="key-s">S</kbd></span> <span class="keys"><kbd class="key-o">O</kbd></span> <span class="keys"><kbd class="key-enter">Enter</kbd></span> <span class="keys"><kbd class="key-d">D</kbd></span> <span class="keys"><kbd class="key-2">2</kbd></span> <span class="keys"><kbd class="key-w">W</kbd></span>.   </p>
+<ul>
+<li><span class="keys"><kbd class="key-slash">/</kbd></span> triggers a search.  This is an almost universal command -- try <span class="keys"><kbd class="key-slash">/</kbd></span> on Facebook (web) or on this page.</li>
+<li><span class="keys"><kbd class="key-a">A</kbd></span> <span class="keys"><kbd class="key-l">L</kbd></span> <span class="keys"><kbd class="key-s">S</kbd></span> <span class="keys"><kbd class="key-o">O</kbd></span> <span class="keys"><kbd class="key-enter">Enter</kbd></span> tells <code>vim</code> what you want to search.
+After enter, your cursor should be placed at the beginning of <code>also</code>.</li>
+<li><span class="keys"><kbd class="key-d">D</kbd></span> <span class="keys"><kbd class="key-2">2</kbd></span> <span class="keys"><kbd class="key-w">W</kbd></span> tell <code>vim</code> to "delete two words".</li>
+</ul>
+<p>Instead of worrying about the actual actions to perform the deletion, we issue higher-level commands to describe what we want to do.  This is powerful since this is how our brain thinks -- "I need to insert this here, change this word to that, remove two lines, etc"  All these maps into commands in <code>vim</code>.  As a result, once you master <code>vim</code> basics, you can type as fast as you think<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">1</a></sup>!  </p>
+<p>A common pattern for <code>vim</code> command consists of three parts: (i) place the cursor; (ii) performance an action; (iii) move to the new placement of the cursor.  In the example above,
+<span class="keys"><kbd class="key-slash">/</kbd></span> <span class="keys"><kbd class="key-a">A</kbd></span> <span class="keys"><kbd class="key-l">L</kbd></span> <span class="keys"><kbd class="key-s">S</kbd></span> <span class="keys"><kbd class="key-o">O</kbd></span> <span class="keys"><kbd class="key-enter">Enter</kbd></span> places the cursor, <span class="keys"><kbd class="key-d">D</kbd></span> is the action (delete), and <span class="keys"><kbd class="key-2">2</kbd></span> <span class="keys"><kbd class="key-w">W</kbd></span> is the movement (move the cursor forward by two words).</p>
+<p>Another common command that students used is <span class="keys"><kbd class="key-g">G</kbd></span> <span class="keys"><kbd class="key-g">G</kbd></span> <span class="keys"><kbd class="key-equal">=</kbd></span> <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-g">G</kbd></span>.  This command is used to indent the source code in the current file.  <span class="keys"><kbd class="key-g">G</kbd></span> <span class="keys"><kbd class="key-g">G</kbd></span> is the command to place the cursor at the top of the file.  <span class="keys"><kbd class="key-equal">=</kbd></span> is the the action (indent), and <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-g">G</kbd></span> is the command to place the cursor on the last line of the file.  </p>
+<h3 id="4-be-a-good-unix-citizen">4. Be A Good Unix Citizen</h3>
+<p>Not only the basic commands <code>vim</code> adhere to the Unix principles of composability, <code>vim</code> plays well with Unix shells, which add additional power to the <code>vim</code>.  For instance, if you want to have the standard output from a command paste into the file you are editing, you can run:</p>
+<p><pre class="highlight"><code>:r! &lt;command&gt;</code></pre>
+<span class="keys"><kbd class="key-colon">:</kbd></span> triggers the <code>vim</code> command line.  <span class="keys"><kbd class="key-r">R</kbd></span> ask <code>vim</code> to read something and paste it into the current cursor location.  At this point, you can pass in, for instance, another file name.  But here, we enter
+<span class="keys"><kbd class="key-exclam">!</kbd></span>, which tells <code>vim</code> to run a shell.  We then pass the <code>command</code> to the shell.  Whatever the command writes to the standard output, will be read and inserted into <code>vim</code>.</p>
+<p>Want to insert today's date?
+<pre class="highlight"><code>:r! date</code></pre></p>
+<p>Want to insert a mini calendar?
+<pre class="highlight"><code>:r! cal</code></pre></p>
+<p>Want to insert the list of all JPG pictures?
+<pre class="highlight"><code>:r! ls *jpg</code></pre></p>
+<p>You can even pass a chunk of text from <code>vim</code> to the standard input of another program, and replace it with what is printed to the standard output
+by that program.</p>
+<h2 id="other-reasons-to-learn-vim">Other Reasons To Learn <code>vim</code></h2>
+<p>Besides enabling you to type as fast as you think with as few hand movements as possible, there are other reasons to use <code>vim</code>:</p>
+<ul>
+<li>
+<p><code>vim</code> is installed by default in almost any Unix environment.  Imagine if you get called to a client-side to debug a Linux server and you need to edit something -- you can rest assure that <code>vim</code> is there.</p>
+</li>
+<li>
+<p><code>vim</code> is the only source code editor you need to learn and master.  It works for almost any programming language.  If you use IDE, you have to learn IntelliJ for Java, IDLE for Python, Visual Studio C++ for C++, etc.</p>
+</li>
+<li>
+<p><code>vim</code> is extensible and programmable.  It has been around for almost 30 years, and tons of plugins have been written.  Whatever feature you need, there is likely a native <code>vim</code> command or a <code>vim</code> plugin for that.</p>
+</li>
+</ul>
+<p>The only downside to using <code>vim</code> is that it is text-only (some considers it ugly) and the steep learning curve.  </p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:3">
+<p>The book <em>Practical Vim</em> by Drew Neil has the subtitle "Edit text at the speed of thought".&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
