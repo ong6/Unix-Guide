@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The website for Unix Workshop">
+    <meta name="description" content="All basic Unix commands">
     <meta name="author" content="Ooi Wei Tsang">
-    <link rel="canonical" href="https://nus-unix-workshop.github.io/2021-s1/">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/">
     <link rel="shortcut icon" href="img/favicon.ico">
 
     
-    <title>Home - UNIX 101</title>
+    <title>Home - Basic Unix for CS2030/S</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -57,7 +57,7 @@
 
             <!-- Main title -->
 
-            <a class="navbar-brand" href=".">UNIX 101</a>
+            <a class="navbar-brand" href=".">Basic Unix for CS2030/S</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -68,12 +68,6 @@
                 
                     <li class="active">
                         <a href=".">Home</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="schedule/">Schedule</a>
                     </li>
                 
                 
@@ -94,12 +88,6 @@
 </li>
 
                         
-                            
-<li >
-    <a href="tmate/">Setup tmate</a>
-</li>
-
-                        
                         </ul>
                     </li>
                 
@@ -111,89 +99,41 @@
                         
                             
 <li >
-    <a href="why-unix/">1. Why Unix?</a>
+    <a href="basic-shell/">1. Terminal and Shell</a>
 </li>
 
                         
                             
 <li >
-    <a href="why-cli/">2. Why CLI?</a>
+    <a href="basic-path-nav/">2. Path and Navigation</a>
 </li>
 
                         
                             
 <li >
-    <a href="shell/">3. Terminal and Shell</a>
+    <a href="basic-file-management/">3. File Management</a>
 </li>
 
                         
                             
 <li >
-    <a href="path-nav/">4. Path and Navigation</a>
+    <a href="basic-vim-intro/">4. Intro to Vim</a>
 </li>
 
                         
                             
 <li >
-    <a href="file-management/">5. File Management</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="chmod/">6. File Permissions</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="stdio/">7. Standard I/O</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="pipe/">8. Composition with Pipe</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="pattern/">9. Pattern Matching</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="efficiency/">10. Productivity with Unix</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="vim-intro/">11. Intro to Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="vim-practice/">12. Hands on with Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="script/">13. Bash Scripting</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="ssh/">14. Remote Servers</a>
+    <a href="basic-vim-practice/">5. Hands on with Vim</a>
 </li>
 
                         
                         </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="cheat-sheet/">Jun Xiong's CheatSheet</a>
                     </li>
                 
                 
@@ -217,12 +157,12 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="next" href="schedule/">
+                        <a rel="next" href="wsl/">
                             Next <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/nus-unix-workshop/2021-s1/edit/master/docs/index.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/index.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -234,16 +174,10 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#unix-101-the-nus-soc-unixhome-workshop">Unix 101: The NUS SoC Unix@Home Workshop</a></li>
-            <li class="second-level"><a href="#ay2021-semester-1">AY20/21 Semester 1</a></li>
-                
+        <li class="first-level active"><a href="#unix-basic-guide">Unix Basic Guide</a></li>
             <li class="second-level"><a href="#about">About</a></li>
                 
-            <li class="second-level"><a href="#objectives">Objectives</a></li>
-                
-            <li class="second-level"><a href="#time-and-venue">Time and Venue</a></li>
-                
-            <li class="second-level"><a href="#registration">Registration</a></li>
+            <li class="second-level"><a href="#credit">Credit</a></li>
                 
             <li class="second-level"><a href="#license">License</a></li>
                 
@@ -251,45 +185,19 @@
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="unix-101-the-nus-soc-unixhome-workshop">Unix 101: The NUS SoC Unix@Home Workshop</h1>
-<h3 id="ay2021-semester-1">AY20/21 Semester 1</h3>
+<h1 id="unix-basic-guide">Unix Basic Guide</h1>
 <h2 id="about">About</h2>
-<p>The NUS SoC Unix Workshop is a workshop organized by faculty members of the School of Computing, National University of Singapore, for first-year students.  This year, we will conduct the "Unix@Home" version, entirely online via Zoom.</p>
-<h2 id="objectives">Objectives</h2>
-<p>The aims of the workshop are</p>
-<ul>
-<li>To introduce students to using Unix-based computing environment for daily computing tasks</li>
-<li>To prepare students to be efficient in using Unix for their computing career</li>
-</ul>
-<p>After taking the workshop, students are expected to:</p>
-<ul>
-<li>Understand common terminology: Unix, Linux, Ubuntu, SunOS, ssh, host, command line, shell, operating systems, etc.</li>
-<li>Appreciate the advantages of the Unix environment</li>
-<li>Understand the Unix file organization</li>
-<li>Able to perform common file management tasks (create/copy/move/remove/change permission, etc) through Unix shell</li>
-<li>(For Windows 10 users) Setup local Unix environment</li>
-<li>Setup apt (Win10) or Homebrew (macOS) and able to use it to install library or applications</li>
-</ul>
-<h2 id="time-and-venue">Time and Venue</h2>
-<p>There will be two versions of the workshop, one for macOS users, the other for Windows 10 users.</p>
-<p>The date and time are as follows:</p>
-<ul>
-<li><strong>3-4 August</strong>, 2020 (Mon - Tue), 9:00 to 11:30 am each day.<ul>
-<li>for macOS users only</li>
-</ul>
-</li>
-<li><strong>6-7 August</strong>, 2020 (Thu - Fri), 9:00 to 11:30 am each day.<ul>
-<li>for Windows 10 users only</li>
-</ul>
-</li>
-</ul>
-<p>The workshop will be conducted online via Zoom.</p>
-<h2 id="registration">Registration</h2>
-<p>First-year students taking CS1010, CS2030, CS2030S, and CS2040 in Semester 1 of AY2020/21 will be given priority to register for and to attend the workshop.</p>
-<p>The workshop is sponsored by the NUS School of Computing and is free to attend.  Space, however, is limited -- please register only if you are committed to attending.</p>
-<p>lease <a href="https://nus.syd1.qualtrics.com/jfe/form/SV_8tQi8pwT2MGXFLD">register here.</a> before <strong>28 July, 2020</strong>.</p>
+<p>This is a Summary of all the basic Unix command that I use often designed for
+CS2030/S students. This guide will cover most of the basic Unix tools that you
+will need to speed up and make writing code on Unix systems a breeze.</p>
+<p>Refer to the notes before looking at the cheatsheet to get a basic understanding
+of Unix.</p>
+<h2 id="credit">Credit</h2>
+<p>This guide was adapted and edited from the original guide:
+"<a href="https://github.com/nus-unix-workshop/2021-s1">https://github.com/nus-unix-workshop/2021-s1</a>".</p>
 <h2 id="license">License</h2>
-<p>The content of this site is licensed under the <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Common Attribution-NonCommercial-ShareAlike 4.0 International license</a></p></div>
+<p>The content of this site is licensed under the
+<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Common Attribution-NonCommercial-ShareAlike 4.0 International license</a></p></div>
         
         
     </div>
@@ -315,7 +223,7 @@
 
     <script>var base_url = "."</script>
     
-        <script>var shortcuts = {"previous": 76, "next": 72, "search": 191}</script>
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
     
     <script src="js/base.js"></script>
     <script src="search/main.js"></script>
@@ -392,5 +300,5 @@
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2020-07-31 05:25:10.544060+00:00
+Build Date UTC : 2021-02-04 18:10:55.539580+00:00
 -->

@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The website for Unix Workshop">
+    <meta name="description" content="All basic Unix commands">
     <meta name="author" content="Ooi Wei Tsang">
     
-    <link rel="shortcut icon" href="/2021-s1/img/favicon.ico">
+    <link rel="shortcut icon" href="/Unix-Guide/img/favicon.ico">
 
     
-    <title>UNIX 101</title>
+    <title>Basic Unix for CS2030/S</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -19,14 +19,14 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
     <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
-    <link href="/2021-s1/css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="/2021-s1/css/base.min.css" rel="stylesheet">
-    <link href="/2021-s1/css/cinder.min.css" rel="stylesheet">
+    <link href="/Unix-Guide/css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="/Unix-Guide/css/base.min.css" rel="stylesheet">
+    <link href="/Unix-Guide/css/cinder.min.css" rel="stylesheet">
 
      
 
     
-    <link href="/2021-s1/css/ooiwt.css" rel="stylesheet">
+    <link href="/Unix-Guide/css/ooiwt.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -57,7 +57,7 @@
 
             <!-- Main title -->
 
-            <a class="navbar-brand" href="/2021-s1/.">UNIX 101</a>
+            <a class="navbar-brand" href="/Unix-Guide/.">Basic Unix for CS2030/S</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -67,13 +67,7 @@
                 
                 
                     <li >
-                        <a href="/2021-s1/.">Home</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="/2021-s1/schedule/">Schedule</a>
+                        <a href="/Unix-Guide/.">Home</a>
                     </li>
                 
                 
@@ -84,19 +78,13 @@
                         
                             
 <li >
-    <a href="/2021-s1/wsl/">Setup for Windows 10</a>
+    <a href="/Unix-Guide/wsl/">Setup for Windows 10</a>
 </li>
 
                         
                             
 <li >
-    <a href="/2021-s1/mac/">Setup for macOS</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/tmate/">Setup tmate</a>
+    <a href="/Unix-Guide/mac/">Setup for macOS</a>
 </li>
 
                         
@@ -111,85 +99,31 @@
                         
                             
 <li >
-    <a href="/2021-s1/why-unix/">1. Why Unix?</a>
+    <a href="/Unix-Guide/basic-shell/">1. Terminal and Shell</a>
 </li>
 
                         
                             
 <li >
-    <a href="/2021-s1/why-cli/">2. Why CLI?</a>
+    <a href="/Unix-Guide/basic-path-nav/">2. Path and Navigation</a>
 </li>
 
                         
                             
 <li >
-    <a href="/2021-s1/shell/">3. Terminal and Shell</a>
+    <a href="/Unix-Guide/basic-file-management/">3. File Management</a>
 </li>
 
                         
                             
 <li >
-    <a href="/2021-s1/path-nav/">4. Path and Navigation</a>
+    <a href="/Unix-Guide/basic-vim-intro/">4. Intro to Vim</a>
 </li>
 
                         
                             
 <li >
-    <a href="/2021-s1/file-management/">5. File Management</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/chmod/">6. File Permissions</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/stdio/">7. Standard I/O</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/pipe/">8. Composition with Pipe</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/pattern/">9. Pattern Matching</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/efficiency/">10. Productivity with Unix</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/vim-intro/">11. Intro to Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/vim-practice/">12. Hands on with Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/script/">13. Bash Scripting</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="/2021-s1/ssh/">14. Remote Servers</a>
+    <a href="/Unix-Guide/basic-vim-practice/">5. Hands on with Vim</a>
 </li>
 
                         
@@ -199,7 +133,13 @@
                 
                 
                     <li >
-                        <a href="/2021-s1/extra/">Extra</a>
+                        <a href="/Unix-Guide/cheat-sheet/">Jun Xiong's CheatSheet</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/Unix-Guide/extra/">Extra</a>
                     </li>
                 
                 
@@ -212,7 +152,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/nus-unix-workshop/2021-s1/"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://github.com/ong6/Unix-Guide/"><i class="fab fa-github"></i> GitHub</a>
                     </li>
             </ul>
         </div>
@@ -226,7 +166,7 @@
       <div id="main-content" class="span12">
         <h1 id="404-page-not-found" style="text-align: center">404</h1>
         <p style="text-align: center"><strong>Page not found</strong></p>
-        <p style="text-align: center"><a href="/2021-s1/">Home</a></p>
+        <p style="text-align: center"><a href="/Unix-Guide/">Home</a></p>
       </div>
     </div>
 
@@ -246,18 +186,18 @@
         
     </footer>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="/2021-s1/js/bootstrap-3.0.3.min.js"></script>
+    <script src="/Unix-Guide/js/bootstrap-3.0.3.min.js"></script>
 
       <!-- default is to include highlightjs -->
     
     
 
-    <script>var base_url = "/2021-s1/"</script>
+    <script>var base_url = "/Unix-Guide/"</script>
     
-        <script>var shortcuts = {"previous": 76, "next": 72, "search": 191}</script>
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
     
-    <script src="/2021-s1/js/base.js"></script>
-    <script src="/2021-s1/search/main.js"></script>
+    <script src="/Unix-Guide/js/base.js"></script>
+    <script src="/Unix-Guide/search/main.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
