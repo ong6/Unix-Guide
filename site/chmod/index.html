@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/chmod/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Unit 6: File Permission Management - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/chmod.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#unit-6-file-permission-management">Unit 6: File Permission Management</a></li>
+            <li class="second-level"><a href="#the-what-of-file-permissions">The What of File Permissions</a></li>
+                
+            <li class="second-level"><a href="#the-who-of-file-permissions">The Who of File Permissions</a></li>
+                
+            <li class="second-level"><a href="#checking-file-permission">Checking file permission</a></li>
+                
+            <li class="second-level"><a href="#the-chmod-command">The chmod command</a></li>
+                
+            <li class="second-level"><a href="#common-scenarios-for-chmod">Common Scenarios for chmod</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="unit-6-file-permission-management">Unit 6: File Permission Management</h1>
+<p>File permissions determine <em>who</em> can do <em>what</em> to a file.  Typically, you do not need to fiddle with the file permission, but when you need to, it is usually for an important reason and it is critical to do it right.</p>
+<h2 id="the-what-of-file-permissions">The <em>What</em> of File Permissions</h2>
+<p>Let's look at <em>what</em> you can do to a file first.  Unix file permissions allow control of three actions: <code>r</code> (read), <code>w</code> (write) and <code>x</code> (execute).  These permission settings allow the following different actions to be done for regular files and directories.</p>
+<table>
+<thead>
+<tr>
+<th>permission</th>
+<th>effect on file</th>
+<th>effect on directory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code></td>
+<td>reading the content of a file</td>
+<td>read the names of the files in the directory</td>
+</tr>
+<tr>
+<td><code>w</code></td>
+<td>writing into a file</td>
+<td>create/delete/rename files in the directory</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>executing a file</td>
+<td>access contents and meta-info (size, creation time) of files in the directory</td>
+</tr>
+</tbody>
+</table>
+<p>These three actions can be controlled independently.  </p>
+<p>The permissions on a file can be expressed in two ways:</p>
+<ul>
+<li>
+<p>using symbolic notation.  For instance,  <code>rwx</code>, <code>r-x</code>, <code>-wx</code>, where a <code>-</code> means that the corresponding permission is not given (in the order of <code>r</code>, <code>w</code>, <code>x</code>).</p>
+</li>
+<li>
+<p>using a numerical notation. This notation uses a digit between 0 and 7, which is computed as a sum of the individual digit representing the permissions: <code>r</code> is represented with 4, <code>w</code> is represented with 2, and <code>x</code> is represented with 1.
+For instance, <code>r-x</code> has a numerical representation of 5, and <code>-wx</code> has a numerical representation of 3.</p>
+</li>
+</ul>
+<h2 id="the-who-of-file-permissions">The <em>Who</em> of File Permissions</h2>
+<p>Unix divides the users into three classes: <code>u</code> is the <b>u</b>ser who owns the file; <code>g</code> refers to the users in the same <b>g</b>roup as the user; and <code>o</code> are all the <b>o</b>ther users.</p>
+<p>The permissions can be controlled separately for these classes of users.  The permission notation simply concatenates the file permissions of each class of users together, in the order of <code>u</code>, <code>g</code>, and <code>o</code>.</p>
+<p>For instance, the permission of 644, or <code>rw-r--r--</code>, on a file means that:</p>
+<ul>
+<li>the owner can read and write</li>
+<li>the group users can only read</li>
+<li>all the other users can only read</li>
+</ul>
+<h2 id="checking-file-permission">Checking file permission</h2>
+<p>You can view the permission of a file by using the <code>ls -l</code> command (<code>l</code> for long format):</p>
+<pre class="highlight"><code>$ ls -l test.txt
+-rw-r--r--@ 1 ooiwt  staff  64 Jul 28 09:52 test.txt</code></pre>
+<p>Ignoring the first <code>-</code> and the last <code>@</code>, you can see that the permission of <code>test.txt</code> is 644.</p>
+<h2 id="the-chmod-command">The <code>chmod</code> command</h2>
+<p>You can use <code>chmod</code> command to change the permissions of a file or a directory.</p>
+<p>For instance,
+<pre class="highlight"><code>$ chmod 666 test.txt
+$ ls -l test.txt
+-rw-rw-rw-@ 1 ooiwt  staff  64 Jul 28 09:52 test.txt</code></pre>
+would change add the permission <code>w</code> to both group and other users<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.</p>
+<p>An alternative way is to just specify the changes.  To remove the write permission from others, you can write:
+<pre class="highlight"><code>$ chmod o-w test.txt
+$ ls -l test.txt
+-rw-rw-r--@ 1 ooiwt  staff  64 Jul 28 09:52 test.txt</code></pre></p>
+<h2 id="common-scenarios-for-chmod">Common Scenarios for <code>chmod</code></h2>
+<p>Here are some scenarios where you might need to use the <code>chmod</code> command:</p>
+<ul>
+<li>
+<p>If you use the SoC Unix server to do your homework, you should prevent the directory that stores your homework from being accessible by other users.  Make sure that your homework directory as the permission of <code>700</code>.</p>
+</li>
+<li>
+<p>If you download a file from the Internet and you do not have the permission to read it, you should do a <code>u+r</code> to give yourself the read permission.</p>
+</li>
+<li>
+<p>A program should have execution permission to run.  If you have a script or an executable file that you can't run, give yourself the execution permission <code>u+x</code>.</p>
+</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>Giving write permission to other users is a security risk and you should not do this unless you know what you are doing.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

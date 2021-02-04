@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/pipe/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Unit 8: Composing Programs with `|` - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/pipe.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#unit-8-composing-programs-with">Unit 8: Composing Programs with |</a></li>
+            <li class="second-level"><a href="#useful-utilities">Useful Utilities</a></li>
+                
+                <li class="third-level"><a href="#head-and-tail">head and tail</a></li>
+                <li class="third-level"><a href="#echo">echo</a></li>
+                <li class="third-level"><a href="#sort">sort</a></li>
+                <li class="third-level"><a href="#uniq">uniq</a></li>
+                <li class="third-level"><a href="#grep">grep</a></li>
+            <li class="second-level"><a href="#pipe-example">Pipe Example</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="unit-8-composing-programs-with">Unit 8: Composing Programs with <code>|</code></h1>
+<p>Another key innovation of Unix is that led to its success is the invention of the <code>|</code> operator.  </p>
+<p>Before Unix, operating systems tend to provide complex, monolithic, programs.  The philosophy of Unix, however, is to provide many small, simple, utility programs, that can be composed to complete a more complex task.  These small programs each do one thing only (and do it well) and so are easier to write and less prone to bugs.</p>
+<p>The composition of these utility programs relies on two things.  First, plain text is often used as input and output of the programs.  These allow the programs to understand each other easily.  Second, they use <code>|</code> to communicate with each other.  The <code>|</code> operator takes the standard output from one program and redirects it as the standard input of another program.</p>
+<p>For instance,
+<pre class="highlight"><code>$ cat test.txt | wc
+       1      11      64</code></pre>
+compose <code>cat</code> and <code>wc</code> together.  Recall that <code>cat</code> reads the content of the file and prints it to standard output.  Here, we pipe the standard output from <code>cat</code> to <code>wc</code>.  So now, these printed texts are redirected as the standard input to <code>wc</code>.</p>
+<p>But this is just the same as
+<pre class="highlight"><code>$ wc &lt; test.txt</code></pre>
+that we have seen before.  What's the power in <code>|</code>?  </p>
+<p>Now, recall that we have made copies of <code>test.txt</code> earlier, into <code>foo.txt</code> and <code>bar.txt</code>.  If you have not done so or have removed them, you can quickly reproduce the files with:
+<pre class="highlight"><code>$ cp test.txt foo.txt
+$ cp test.txt bar.txt</code></pre></p>
+<p>Let's suppose now I want to count the total number of words for all three files.  Instead of calling <code>wc</code> on each file one by one, and sum them up myself.  I can just run:</p>
+<pre class="highlight"><code>$ cat test.txt foo.txt bar.txt | wc
+       3      33     192</code></pre>
+<p>Here, <code>cat</code> read the three files, concatenate their content, and pass the output to <code>wc</code> for counting.</p>
+<h2 id="useful-utilities">Useful Utilities</h2>
+<p>Before we see more interesting examples of using <code>|</code>, let's move beyond <code>cat</code> and <code>wc</code>, and see what other simple tools are there in Unix.</p>
+<h3 id="head-and-tail"><code>head</code> and <code>tail</code></h3>
+<p><code>head</code> and <code>tail</code> prints out the first <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> lines and last <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> lines from a file (or standard input if the file name is not given).  By default, <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> is 10, but you can pass in an argument to specify <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>.</p>
+<pre class="highlight"><code>$ cat test.txt foo.txt bar.txt
+This is a test file for learning Unix file management commands.
+This is a test file for learning Unix file management commands.
+This is a test file for learning Unix file management commands.
+$ cat test.txt foo.txt bar.txt | tail -1
+This is a test file for learning Unix file management commands.</code></pre>
+<h3 id="echo"><code>echo</code></h3>
+<p><code>echo</code> simply prints out the command-line argument to the standard output.</p>
+<pre class="highlight"><code>$ echo "hello world!"
+hello world!</code></pre>
+<h3 id="sort"><code>sort</code></h3>
+<p><code>sort</code> rearrange the input lines in alphabetical order.
+<pre class="highlight"><code>$ sort
+john
+jane
+peter
+mary^D
+jane
+john
+mary
+peter</code></pre></p>
+<p>In the example above, I entered <code>john</code>, <code>jane</code>, <code>peter</code>, <code>mary</code> followed by <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-d">D</kbd></span> to signify the end of input.  <code>sort</code> prints out <code>jane</code>, <code>john</code>, <code>mary</code>, <code>peter</code>, in that order.</p>
+<h3 id="uniq"><code>uniq</code></h3>
+<p><code>uniq</code> remove any two consecutive lines that are the same.</p>
+<pre class="highlight"><code>$ uniq
+1
+2
+2
+2
+1
+1^D
+1
+2
+1</code></pre>
+<p>For instance, in the above, there are three consecutive lines of <code>2</code>, so only one remained.  There are also two consecutive lines of <code>1</code>, so only one remained.`</p>
+<h3 id="grep"><code>grep</code></h3>
+<p><code>grep</code> returns the lines of text from the given file (or the standard input) that matches the given string.  For instance, run</p>
+<pre class="highlight"><code>$ grep abc</code></pre>
+<p>and start typing in some lines of text, some containing <code>abc</code>, some do not.  <code>grep</code> will spew out into the standard output all the lines that contain the text <code>abc</code> somewhere.  As usual,
+hit <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-d">D</kbd></span> when you are done.</p>
+<h2 id="pipe-example">Pipe Example</h2>
+<p>To give you an example of how useful <code>|</code> is, here is a real example.  When processing the registration of the workshop, I have quite a few registrations that are duplicates -- students registered more than ones.  I need a quick way to count how many unique registrants are there.
+So I keep the student id of all registrants in a file called <code>ID</code>.  For instance, the file <code>ID</code> contains (not real data, of course)</p>
+<pre class="highlight"><code>A1234567X,CS
+A1234559A,CEG
+A1239999J,CEG
+A1234580K,CEG
+A1233210O,CS
+A1234567X,CS
+A1234581Q,ISC
+A1233216T,ISC
+A1239999J,CEG</code></pre>
+<p>Now, to count how many unique registrants, I just need to run:</p>
+<pre class="highlight"><code>$ cat ID | sort | uniq | wc -l
+    7</code></pre>
+<p>To count how many uniq registrants are <code>CEG</code> students, I just change it to:
+<pre class="highlight"><code>$ cat ID | sort | uniq | grep CEG | wc -l
+    3</code></pre></p></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

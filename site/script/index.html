@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/script/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Unit 13: `bash` Scripts - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/script.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#unit-13-bash-scripts">Unit 13: bash Scripts</a></li>
+            <li class="second-level"><a href="#bashrc">.bashrc</a></li>
+                
+            <li class="second-level"><a href="#bash-environment-variables">Bash Environment Variables</a></li>
+                
+            <li class="second-level"><a href="#simple-bash-scripts">Simple Bash Scripts</a></li>
+                
+            <li class="second-level"><a href="#developing-an-automation-mind-set">Developing an Automation Mind Set</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="unit-13-bash-scripts">Unit 13: <code>bash</code> Scripts</h1>
+<p>Now that we know the basic of text editing, we will start
+writing some simple bash scripts.  </p>
+<h2 id="bashrc"><code>.bashrc</code></h2>
+<p>First, let's write a bash script that will be executed every time
+we run bash.  Just like <code>.vimrc</code>, the "run commands" for <code>bash</code>
+is called <code>.bashrc</code>.  Recall that the <code>rc</code> files should be hidden
+and located in the home directory.</p>
+<p>So, start <code>vim</code> by</p>
+<pre class="highlight"><code>$ vim ~/.bashrc</code></pre>
+<p>and add the following lines at the bottom of <code>.bashrc</code>.</p>
+<p><pre class="highlight"><code>alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
+echo ".bashrc loaded"</code></pre>
+If your <code>.bashrc</code> already contains some text, leave the existing text
+there.  Otherwise, you will see a splash screen about <code>vim</code>.  Just to
+into <code>INSERT</code> more to get rid of the splash screen.</p>
+<p>Remember that the <code>-i</code> flag causes these commands to interact with you
+and ask to confirm whether you want to remove/override a file.
+The <code>alias</code> command is used to create a new command.  Here,
+<pre class="highlight"><code>alias rm="rm -i"</code></pre>
+creates a new command called <code>rm</code> that does perform <code>rm -i</code>.  So now,
+every time you type <code>rm</code> in <code>bash</code>, <code>bash</code> will run <em>your</em> <code>rm</code>,
+which is just <code>rm -i</code> (the second <code>rm</code> is <code>bash</code>'s <code>rm</code>).</p>
+<p>Go ahead and hit <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-z">Z</kbd><span>+</span><kbd class="key-z">Z</kbd></span> to save and quit.  Now, exit <code>bash</code> and
+reload <code>bash</code> again.  You should see the message <code>.bashrc loaded</code>
+printed.</p>
+<p>Try to create a dummy file and remove it.  <code>bash</code> should now prompt you
+for confirmation.
+<pre class="highlight"><code>$ touch dummy
+$ rm dummy
+remove dummy?</code></pre>
+You can hit <span class="keys"><kbd class="key-y">Y</kbd></span> for yes or <span class="keys"><kbd class="key-n">N</kbd></span> for no.</p>
+<h2 id="bash-environment-variables">Bash Environment Variables</h2>
+<p>In addition to creating your customized commands, you can also
+affect the behavior of <code>bash</code> by configuring its environment
+variables.  An environment variable is something that can hold a
+value (just like <span><span class="MathJax_Preview"><span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></span><script type="math/tex"><span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span></script></span> in math).  The naming convention for an environment variable is to use all upper cases.</p>
+<p>The most common ones used are:</p>
+<ul>
+<li><code>PATH</code>: which is where <code>bash</code> would search for a command to execute.</li>
+<li><code>PS1</code>: which allows you to customize your command prompt.</li>
+<li><code>EDITOR</code>: which allows you to configure the default text editor.</li>
+</ul>
+<p>For <code>PS1</code> configuration, there are many neat examples on the
+Internet.  We recommend that you should least have your identity
+displayed somewhere on the command prompt so that the tutors
+know which terminal they are looking at via <code>tmate</code>.</p>
+<p>For <code>EDITOR</code>, you can set it to <code>vim</code>.</p>
+<p>Remember that earlier, to run <code>hello.sh</code>, we needed to include the
+prefix <code>./hello.sh</code>?  The <code>./</code> is to tell <code>bash</code> to look for the
+executable in the current directory.  To avoid typing <code>./</code> all the
+time (remember our goal: minimize finger movement), we can add <code>.</code>
+to the <code>PATH</code>.</p>
+<p>Now, <code>cd</code> into the directory where you have <code>hello.sh</code>, and type
+<pre class="highlight"><code>$ echo $PATH
+$ export PATH=$PATH:.
+$ echo $PATH</code></pre></p>
+<p>The first command shows you what the current <code>PATH</code> variable
+contains.  The <code>$</code> sign refers to the value of that variable instead of the variable name.  The <code>PATH</code> contains a list of paths in the directory structure, separated by <code>:</code>.</p>
+<p>In the second line, we add <code>.</code> (the current directory) to the <code>PATH</code>
+variable.  The third line checks if <code>.</code> is added correctly.</p>
+<p>If <code>.</code> is indeed added to the path, you can now run <code>hello.sh</code>
+without the prefix <code>./</code>.</p>
+<p>Note that there is a security risk in adding <code>.</code> to <code>PATH</code>.  My recommendation is only to do it on your personal Unix system (not a shared
+computing server) and add <code>.</code> only at the end of <code>PATH</code>.  See this
+<a href="http://www.faqs.org/faqs/unix-faq/faq/part2/section-13.html">FAQ</a>
+for more information.</p>
+<p>If you wish, you can now edit this line into <code>.bashrc</code>, so that it is
+executed every time you launch `bash.
+<pre class="highlight"><code>export PATH=$PATH:.</code></pre></p>
+<h2 id="simple-bash-scripts">Simple Bash Scripts</h2>
+<p>In addition to creating aliases, you can put commonly used commands in
+a <code>bash</code> script. The advantage is that it allows us to pass in
+arguments so that the script is more flexible.</p>
+<p>For instance, the following script finds out the size of a directory and
+the size of the largest subdirectory (in MBs)</p>
+<pre class="highlight"><code>#!/bin/bash
+du -m $1 | sort -n | tail -2</code></pre>
+<p>You can read the man pages for what <code>du</code>, <code>sort</code>, and <code>tail</code> and the
+various options do.  But the two interesting points we wish to point
+out are the first line:
+<pre class="highlight"><code>#!/bin/bash</code></pre>
+and the variable <code>$1</code>.</p>
+<p>The <code>#!</code> sequence is called <code>shebang</code>.  It is used by Unix to
+determine which interpreter to use to run this script.  It could be
+replaced with <code>/usr/bin/python</code> or other language interpreters, for
+instance.  But here, we meant this to be a <code>bash</code> script so we tell
+Unix to invoke <code>bash</code>.</p>
+<p>The variable <code>$1</code> will be replaced by the argument passed into the
+script on the command line.  Suppose that we save the script above as <code>dirsize.sh</code>.  Then you run:</p>
+<pre class="highlight"><code>dirsize.sh /usr/local</code></pre>
+<p><code>$1</code> will become <code>/usr/local</code> and so the size of <code>/usr/local</code> and its subdirectories will be determined.</p>
+<p>If you do not pass in any argument, <code>$1</code> will be empty, and the size
+of the current working directory will be determined instead.</p>
+<h2 id="developing-an-automation-mind-set">Developing an Automation Mind Set</h2>
+<p>If you find yourself typing the same command or sequence of commands
+over and over again, it is probably good to start creating a script
+to automate it.  </p>
+<p>You will need to invest some time upfront to get the script written
+and tested, but in the long run, it will save you time.</p></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
