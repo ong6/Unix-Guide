@@ -1,51 +1,41 @@
-site_name: UNIX 101
-site_url: https://nus-unix-workshop.github.io/2021-s1/
+site_name: Basic Unix for CS2030/S
+site_url: https://ong6.github.io/Unix-Guide/
 site_author: Ooi Wei Tsang
-site_description: "The website for Unix Workshop"
-repo_url: "https://github.com/nus-unix-workshop/2021-s1"
-copyright: "This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license."
+site_description: "All basic Unix commands"
+repo_url: "https://github.com/ong6/Unix-Guide"
+copyright:
+  "This content is licensed under <a
+  href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons
+  Attribution-NonCommercial-ShareAlike 4.0 International</a> license."
 
 theme:
   name: cinder
   colorscheme: github
   highlightjs: false
   hljs_languages:
-     - PowerShell
-     - Bash
+    - PowerShell
+    - Bash
 
 shortcuts:
   previous: 72 # h
-  next: 76     # l
-  search: 191  # /
+  next: 76 # l
+  search: 191 # /
 
 nav:
   - Home: index.md
-  - Schedule: schedule.md
   - Setup:
       - Setup for Windows 10: wsl.md
       - Setup for macOS: mac.md
-      - Setup tmate: tmate.md
   - Notes:
-      - 1. Why Unix?: why-unix.md
-      - 2. Why CLI?: why-cli.md
-      - 3. Terminal and Shell: shell.md
-      - 4. Path and Navigation : path-nav.md
-      - 5. File Management : file-management.md
-      - 6. File Permissions : chmod.md
-      - 7. Standard I/O: stdio.md
-      - 8. Composition with Pipe: pipe.md
-      - 9. Pattern Matching: pattern.md
-      - 10. Productivity with Unix: efficiency.md
-      - 11. Intro to Vim: vim-intro.md
-      - 12. Hands on with Vim: vim-practice.md
-      - 13. Bash Scripting: script.md
-      - 14. Remote Servers: ssh.md
+      - 1. Terminal and Shell: basic-shell.md
+      - 2. Path and Navigation: basic-path-nav.md
+      - 3. File Management: basic-file-management.md
+      - 4. Intro to Vim: basic-vim-intro.md
+      - 5. Hands on with Vim: basic-vim-practice.md
   - Extra: extra.md
-  - Zoom: zoom.md
 
 extra_css:
   - "css/ooiwt.css"
-
 
 markdown_extensions:
   - admonition
@@ -60,12 +50,13 @@ markdown_extensions:
       linenums: false
   - pymdownx.inlinehilite
   - pymdownx.keys:
-      key_map: {
-        bang: "!",
-        dollar: "$",
-        parenthesis-left: "(",
-        parenthesis-right: ")",
-      }
+      key_map:
+        {
+          bang: "!",
+          dollar: "$",
+          parenthesis-left: "(",
+          parenthesis-right: ")",
+        }
   - pymdownx.magiclink
   - pymdownx.mark
   - pymdownx.smartsymbols
