@@ -133,6 +133,12 @@
                 
                 
                     <li >
+                        <a href="../cheat-sheet/">Jun Xiong's CheatSheet</a>
+                    </li>
+                
+                
+                
+                    <li >
                         <a href="../extra/">Extra</a>
                     </li>
                 
@@ -195,10 +201,9 @@ simply referred to as <code>/</code>, without any name. Under the root directory
 other systems directory, which a casual user does not normally need to (and have
 no permission to) modify.</p>
 <h3 id="home-directory">Home Directory</h3>
-<p>Each user has his/her own <em>home</em> directory. The above figure shows where the
-home directory of the user <code>ooiwt</code> resides in the directory tree. The user
-<code>ooiwt</code> may create files or directories in his/her home directory, but not
-elsewhere unless permission is given.</p>
+<p>Each user has his/her own <em>home</em> directory. The user may create files or
+directories in his/her home directory, but not elsewhere unless permission is
+given.</p>
 <p>The home directory is referred to with the symbol <code>~</code> in <code>bash</code>. Sometimes we
 add the username behind <code>~</code> to indicate the home directory of the other user.
 E.g., <code>~bob</code> means the home directory of a user named <code>bob</code>.</p>
@@ -247,11 +252,11 @@ with navigation and directories.</p>
 <h3 id="pwd-print-current-working-directory"><code>pwd</code>: Print Current Working directory</h3>
 <p><code>pwd</code> shows you which directory you are currently in.<br />
 Type <code>pwd</code> into the command prompt, and it will print the absolute path to your
-current working directory. For instance, Suppose you are in <code>/home/o/ooiwt</code>,
+current working directory. For instance, Suppose you are in <code>/home/o/bob</code>,
 entering</p>
 <pre class="highlight"><code class="language-Bash">pwd</code></pre>
 <p>will give the output</p>
-<pre class="highlight"><code class="language-Bash">/home/o/ooiwt</code></pre>
+<pre class="highlight"><code class="language-Bash">/home/o/bob</code></pre>
 <h3 id="ls-list-content-of-a-directory"><code>ls</code>: LiSt content of a directory</h3>
 <p>The <code>ls</code> list the content in the current working directory.</p>
 <p>!!! note "Rule of Silence" Unix follows the economical <em>rule of silence</em>:
@@ -288,12 +293,12 @@ execute a long <code>bash</code> command.</p>
 <p>To navigate in the directory tree, changing the current working directory from
 one to another, we use the <code>cd</code> command.</p>
 <pre class="highlight"><code class="language-Bash">$ pwd
-/home/o/ooiwt
+/home/o/bob
 $ cd workshop
 $ pwd
-/home/o/ooiwt/workshop</code></pre>
-<p>Suppose our starting working directory is <code>/home/o/ooiwt</code>, after we <code>cd</code> into
-<code>workshop</code>, the current working directory becomes <code>/home/o/ooiwt/workshop</code>. Note
+/home/o/bob/workshop</code></pre>
+<p>Suppose our starting working directory is <code>/home/o/bob</code>, after we <code>cd</code> into
+<code>workshop</code>, the current working directory becomes <code>/home/o/bob/workshop</code>. Note
 that <code>cd</code> can take in either an absolute path or a relative path. The example
 above takes in a relative path as the argument.</p>
 <p>As mentioned in the <a href="../shell/">Introduction to Shell</a> unit, it is common to

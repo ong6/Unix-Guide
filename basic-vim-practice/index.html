@@ -133,6 +133,12 @@
                 
                 
                     <li >
+                        <a href="../cheat-sheet/">Jun Xiong's CheatSheet</a>
+                    </li>
+                
+                
+                
+                    <li >
                         <a href="../extra/">Extra</a>
                     </li>
                 
@@ -151,7 +157,7 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="next" href="../extra/">
+                        <a rel="next" href="../cheat-sheet/">
                             Next <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
@@ -178,7 +184,7 @@
                 <li class="third-level"><a href="#deletion">Deletion</a></li>
                 <li class="third-level"><a href="#copy-pasting">Copy Pasting</a></li>
                 <li class="third-level"><a href="#deleting-a-character">Deleting a Character</a></li>
-                <li class="third-level"><a href="#visual-mode">Visual Mode</a></li>
+                <li class="third-level"><a href="#visual-mode-advanced-and-can-be-skipped">Visual Mode (Advanced and can be skipped)</a></li>
                 <li class="third-level"><a href="#the-command">The : command</a></li>
             <li class="second-level"><a href="#lesson-3-insert-mode">Lesson 3: Insert mode!</a></li>
                 
@@ -208,7 +214,7 @@ different setting. But this <code>.vimrc</code> file suffices for now.</p>
 <pre class="highlight"><code>$ cd
 $ mv .vimrc .vimrc.bak
 $ mkdir .backup
-$ wget https://raw.githubusercontent.com/nus-unix-workshop/2021-s1/master/.vimrc</code></pre>
+$ wget https://raw.githubusercontent.com/nus-cs2030/2021-s1/master/.vimrc</code></pre>
 <p>The first line changes your working directory to your home. The second line
 creates a backup <code>.vimrc</code>, if one exists. If it does not, <code>mv</code> will give you an
 error, which is fine. The third line creates a hidden backup directory for
@@ -220,7 +226,7 @@ set this up whenever you <code>vim</code>.</p>
 <h2 id="lesson-1-navigation">Lesson 1: Navigation</h2>
 <p>Now, you can stay in your home directory or go back to your workshop directory.</p>
 <p>Download the following file for practice using <code>vim</code> in this session.</p>
-<pre class="highlight"><code>$ wget https://raw.githubusercontent.com/nus-unix-workshop/2021-s1/master/jfk.txt</code></pre>
+<pre class="highlight"><code>$ wget https://raw.githubusercontent.com/ong6/Unix-Guide/master/jfk.txt</code></pre>
 <p>The file named <code>jfk.txt</code> should be downloaded. Now let's start your first <code>vim</code>
 session.</p>
 <pre class="highlight"><code>$ vim jfk.txt</code></pre>
@@ -271,7 +277,7 @@ happened!</p>
 <p>Change <code>libertyi. liberty.</code> to <code>libtery.</code> by positioning the cursor on the
 second <code>i</code> and delete it. Then use <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-d">D</kbd></span> to delete the extra <code>liberty.</code> at
 the end of the sentence.</p>
-<h3 id="visual-mode">Visual Mode</h3>
+<h3 id="visual-mode-advanced-and-can-be-skipped">Visual Mode (Advanced and can be skipped)</h3>
 <p>In addition to the <code>INSERT</code> and <code>NORMAL</code> modes, <code>vim</code> has the third mode, the
 <code>VISUAL</code> mode. You can enter the <code>VISUAL</code> mode by hitting <span class="keys"><kbd class="key-v">V</kbd></span>. Once in visual
 mode, you can move your cursor to select the text and perform some actions on it
