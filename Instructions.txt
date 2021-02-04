@@ -1,0 +1,7 @@
+Setup for editing steps: 
+1. python setup.py build
+2. python setup.py install
+3. pip3 install mkdocs
+4. mkdocs serve (to open server)
+5. mkdocs gh-deploy (to deploy server)
+6. should create a new branch gh-pages for deployment. (will throw error if gh-pages alr set as root in git repo)
