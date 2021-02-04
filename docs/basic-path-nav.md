@@ -13,10 +13,9 @@ no permission to) modify.
 
 ### Home Directory
 
-Each user has his/her own _home_ directory. The above figure shows where the
-home directory of the user `ooiwt` resides in the directory tree. The user
-`ooiwt` may create files or directories in his/her home directory, but not
-elsewhere unless permission is given.
+Each user has his/her own _home_ directory. The user may create files or
+directories in his/her home directory, but not elsewhere unless permission is
+given.
 
 The home directory is referred to with the symbol `~` in `bash`. Sometimes we
 add the username behind `~` to indicate the home directory of the other user.
@@ -63,7 +62,7 @@ with navigation and directories.
 
 `pwd` shows you which directory you are currently in.  
 Type `pwd` into the command prompt, and it will print the absolute path to your
-current working directory. For instance, Suppose you are in `/home/o/ooiwt`,
+current working directory. For instance, Suppose you are in `/home/o/bob`,
 entering
 
 ```Bash
@@ -73,7 +72,7 @@ pwd
 will give the output
 
 ```Bash
-/home/o/ooiwt
+/home/o/bob
 ```
 
 ### `ls`: LiSt content of a directory
@@ -129,14 +128,14 @@ one to another, we use the `cd` command.
 
 ```Bash
 $ pwd
-/home/o/ooiwt
+/home/o/bob
 $ cd workshop
 $ pwd
-/home/o/ooiwt/workshop
+/home/o/bob/workshop
 ```
 
-Suppose our starting working directory is `/home/o/ooiwt`, after we `cd` into
-`workshop`, the current working directory becomes `/home/o/ooiwt/workshop`. Note
+Suppose our starting working directory is `/home/o/bob`, after we `cd` into
+`workshop`, the current working directory becomes `/home/o/bob/workshop`. Note
 that `cd` can take in either an absolute path or a relative path. The example
 above takes in a relative path as the argument.
 

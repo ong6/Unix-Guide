@@ -2,9 +2,16 @@
 
 ## About
 
-This is a Summary of all the basic Unix command that I use often.
+This is a Summary of all the basic Unix command that I use often designed for
+CS2030/S students. This guide will cover most of the basic Unix tools that you
+will need to speed up and make writing code on Unix systems a breeze.
 
-Do checkout the original guide at
+Refer to the notes before looking at the cheatsheet to get a basic understanding
+of Unix.
+
+## Credit
+
+This guide was adapted and edited from the original guide:
 "https://github.com/nus-unix-workshop/2021-s1".
 
 ## License

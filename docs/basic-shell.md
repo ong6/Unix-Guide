@@ -63,3 +63,18 @@ resources such as memory on the computer). The right sequence to use is
 shortcut in non-Unix environment, many students accidentally hit this control
 sequence, causing their terminal to freeze. Don't panic if this happens. Just
 hit ++control+q++ and things will be back to normal.
+
+## Windows Terminal (Sorry Mac users)
+
+For windows, a great extension that all programmers should have is the Windows
+Terminal.
+
+Windows Terminal is a modern terminal application for users of command-line
+tools and shells like Command Prompt, PowerShell, and Windows Subsystem for
+Linux (WSL). Its main features include multiple tabs, panes, Unicode and UTF-8
+character support, a GPU accelerated text rendering engine, and the ability to
+create your own themes and customize text, colors, backgrounds, and shortcuts.
+
+To download and get started with windows terminal, click and follow the
+instructions on the following link:
+https://docs.microsoft.com/en-us/windows/terminal/get-started

@@ -32,6 +32,7 @@ nav:
       - 3. File Management: basic-file-management.md
       - 4. Intro to Vim: basic-vim-intro.md
       - 5. Hands on with Vim: basic-vim-practice.md
+  - Jun Xiong's CheatSheet: cheat-sheet.md
   - Extra: extra.md
 
 extra_css:

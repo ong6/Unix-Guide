@@ -28,7 +28,7 @@ To get this file,
 $ cd
 $ mv .vimrc .vimrc.bak
 $ mkdir .backup
-$ wget https://raw.githubusercontent.com/nus-unix-workshop/2021-s1/master/.vimrc
+$ wget https://raw.githubusercontent.com/nus-cs2030/2021-s1/master/.vimrc
 ```
 
 The first line changes your working directory to your home. The second line
@@ -48,7 +48,7 @@ Now, you can stay in your home directory or go back to your workshop directory.
 Download the following file for practice using `vim` in this session.
 
 ```
-$ wget https://raw.githubusercontent.com/nus-unix-workshop/2021-s1/master/jfk.txt
+$ wget https://raw.githubusercontent.com/ong6/Unix-Guide/master/jfk.txt
 ```
 
 The file named `jfk.txt` should be downloaded. Now let's start your first `vim`
@@ -136,7 +136,7 @@ Change `libertyi. liberty.` to `libtery.` by positioning the cursor on the
 second `i` and delete it. Then use ++shift+d++ to delete the extra `liberty.` at
 the end of the sentence.
 
-### Visual Mode
+### Visual Mode (Advanced and can be skipped)
 
 In addition to the `INSERT` and `NORMAL` modes, `vim` has the third mode, the
 `VISUAL` mode. You can enter the `VISUAL` mode by hitting ++v++. Once in visual
