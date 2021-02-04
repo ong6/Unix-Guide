@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The website for Unix Workshop">
+    <meta name="description" content="All basic Unix commands">
     <meta name="author" content="Ooi Wei Tsang">
-    <link rel="canonical" href="https://nus-unix-workshop.github.io/2021-s1/mac/">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/mac/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     
-    <title>Setup for macOS - UNIX 101</title>
+    <title>Setup for macOS - Basic Unix for CS2030/S</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -57,7 +57,7 @@
 
             <!-- Main title -->
 
-            <a class="navbar-brand" href="..">UNIX 101</a>
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -68,12 +68,6 @@
                 
                     <li >
                         <a href="..">Home</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="../schedule/">Schedule</a>
                     </li>
                 
                 
@@ -94,12 +88,6 @@
 </li>
 
                         
-                            
-<li >
-    <a href="../tmate/">Setup tmate</a>
-</li>
-
-                        
                         </ul>
                     </li>
                 
@@ -111,85 +99,31 @@
                         
                             
 <li >
-    <a href="../why-unix/">1. Why Unix?</a>
+    <a href="../basic-shell/">1. Terminal and Shell</a>
 </li>
 
                         
                             
 <li >
-    <a href="../why-cli/">2. Why CLI?</a>
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
 </li>
 
                         
                             
 <li >
-    <a href="../shell/">3. Terminal and Shell</a>
+    <a href="../basic-file-management/">3. File Management</a>
 </li>
 
                         
                             
 <li >
-    <a href="../path-nav/">4. Path and Navigation</a>
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
 </li>
 
                         
                             
 <li >
-    <a href="../file-management/">5. File Management</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../chmod/">6. File Permissions</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../stdio/">7. Standard I/O</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../pipe/">8. Composition with Pipe</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../pattern/">9. Pattern Matching</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../efficiency/">10. Productivity with Unix</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../vim-intro/">11. Intro to Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../vim-practice/">12. Hands on with Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../script/">13. Bash Scripting</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../ssh/">14. Remote Servers</a>
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
 </li>
 
                         
@@ -200,12 +134,6 @@
                 
                     <li >
                         <a href="../extra/">Extra</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="../zoom/">Zoom</a>
                     </li>
                 
                 
@@ -223,12 +151,12 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="next" href="../tmate/">
+                        <a rel="next" href="../basic-shell/">
                             Next <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/nus-unix-workshop/2021-s1/edit/master/docs/mac.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/mac.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -256,21 +184,16 @@
 <p>To access the Unix command line interface, hit <span class="keys"><kbd class="key-f4">F4</kbd></span> to access LaunchPad, and type <code>Terminal</code> followed by <span class="keys"><kbd class="key-enter">Enter</kbd></span>.</p>
 <h3 id="install-command-line-development-tool">Install Command Line Development Tool</h3>
 <p>Run </p>
-<div class="highlight"><pre><span></span><code>xcode-select --install
-</code></pre></div>
-
+<pre class="highlight"><code class="language-Bash">xcode-select --install</code></pre>
 <p>to install a set of command-line tools used for software development in macOS.</p>
 <h3 id="install-homebrew">Install Homebrew</h3>
 <p><a href="https://brew.sh/">Homebrew</a> is a command-line software manager for macOS.</p>
 <p>If you have not installed Homebrew before, paste the following into your shell to install it.</p>
-<div class="highlight"><pre><span></span><code>/bin/bash -c <span class="s2">&quot;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh<span class="k">)</span><span class="s2">&quot;</span>
-</code></pre></div>
-
+<pre class="highlight"><code class="language-Bash">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"</code></pre>
 <h3 id="install-wget">Install <code>wget</code></h3>
 <p><code>wget</code> is a useful tool to download files from the Internet.  You can
 install <code>wget</code> using Homebrew:</p>
-<div class="highlight"><pre><span></span><code>$ brew install wget
-</code></pre></div></div>
+<pre class="highlight"><code>$ brew install wget</code></pre></div>
         
         
     </div>

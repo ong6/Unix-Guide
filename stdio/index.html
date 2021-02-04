@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The website for Unix Workshop">
+    <meta name="description" content="All basic Unix commands">
     <meta name="author" content="Ooi Wei Tsang">
-    <link rel="canonical" href="https://nus-unix-workshop.github.io/2021-s1/stdio/">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/stdio/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     
-    <title>7. Standard I/O - UNIX 101</title>
+    <title>Unit 7: Standard Input/Output - Basic Unix for CS2030/S</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -57,7 +57,7 @@
 
             <!-- Main title -->
 
-            <a class="navbar-brand" href="..">UNIX 101</a>
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -68,12 +68,6 @@
                 
                     <li >
                         <a href="..">Home</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="../schedule/">Schedule</a>
                     </li>
                 
                 
@@ -94,102 +88,42 @@
 </li>
 
                         
-                            
-<li >
-    <a href="../tmate/">Setup tmate</a>
-</li>
-
-                        
                         </ul>
                     </li>
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../why-unix/">1. Why Unix?</a>
+    <a href="../basic-shell/">1. Terminal and Shell</a>
 </li>
 
                         
                             
 <li >
-    <a href="../why-cli/">2. Why CLI?</a>
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
 </li>
 
                         
                             
 <li >
-    <a href="../shell/">3. Terminal and Shell</a>
+    <a href="../basic-file-management/">3. File Management</a>
 </li>
 
                         
                             
 <li >
-    <a href="../path-nav/">4. Path and Navigation</a>
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
 </li>
 
                         
                             
 <li >
-    <a href="../file-management/">5. File Management</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../chmod/">6. File Permissions</a>
-</li>
-
-                        
-                            
-<li class="active">
-    <a href="./">7. Standard I/O</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../pipe/">8. Composition with Pipe</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../pattern/">9. Pattern Matching</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../efficiency/">10. Productivity with Unix</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../vim-intro/">11. Intro to Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../vim-practice/">12. Hands on with Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../script/">13. Bash Scripting</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../ssh/">14. Remote Servers</a>
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
 </li>
 
                         
@@ -203,12 +137,6 @@
                     </li>
                 
                 
-                
-                    <li >
-                        <a href="../zoom/">Zoom</a>
-                    </li>
-                
-                
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -217,18 +145,8 @@
                             <i class="fas fa-search"></i> Search
                         </a>
                     </li>
-                    <li >
-                        <a rel="prev" href="../chmod/">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="next" href="../pipe/">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
                     <li>
-                        <a href="https://github.com/nus-unix-workshop/2021-s1/edit/master/docs/stdio.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/stdio.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -260,58 +178,45 @@
 <h2 id="examples-using-cat-and-wc">Examples using <code>cat</code> and <code>wc</code></h2>
 <p>Let's look at these concepts closer, by examining some examples.</p>
 <p>Remember <code>cat</code>?  The <code>cat</code> command takes in a filename and it prints the content of the file to the standard output.</p>
-<div class="highlight"><pre><span></span><code>$ cat test.txt
-This is a test file for learning Unix file management commands.
-</code></pre></div>
-
+<pre class="highlight"><code>$ cat test.txt
+This is a test file for learning Unix file management commands.</code></pre>
 <p>If no filename is given, <code>cat</code> by default try to read from the standard input.  Try running:</p>
-<div class="highlight"><pre><span></span><code>$ cat
-</code></pre></div>
-
+<pre class="highlight"><code>$ cat</code></pre>
 <p>You will see that the command is waiting for you to type in something.  Type in anything, as soon as you press <span class="keys"><kbd class="key-enter">Enter</kbd></span>, <code>cat</code> is going to read in the text from the standard input, as if it is the content of a file, and then prints the content to the standard output.  You can keep typing, supplying text to <code>cat</code>, or you can type <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-d">D</kbd></span> to send the end-of-input command to <code>cat</code>.</p>
 <p>Let's look at another command, <code>wc</code>.  <code>wc</code> is a utility that counts the number of lines, words, characters.  If we call <code>wc</code> and supply it a file name, it will count the number of lines, words, and characters in that given file.</p>
-<div class="highlight"><pre><span></span><code>$ wc test.txt
-       1      11      64 test.txt
-</code></pre></div>
-
+<pre class="highlight"><code>$ wc test.txt
+       1      11      64 test.txt</code></pre>
 <p>The output means that there is 1 line, 11 words, and 64 characters in the file <code>test.txt</code>.</p>
 <p>But if you do not pass in any file name, <code>wc</code> is going to read in the text from the standard input, as if it is the content of a file, and prints the three counters to the standard output.  Go ahead and try:</p>
-<div class="highlight"><pre><span></span><code>$ wc
-</code></pre></div>
-
+<pre class="highlight"><code>$ wc</code></pre>
 <p>You will see that the <code>wc</code> command is waiting for you to type in something.  Type in a few sentences, you can hit <span class="keys"><kbd class="key-enter">Enter</kbd></span> for a new line.  When you are done, type <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-d">D</kbd></span>.  <code>wc</code> will count the number of lines, words, and characters for the text that you just entered.</p>
 <h2 id="output-redirection">Output Redirection</h2>
 <p>By defining two abstract input and output devices (or channels), Unix frees the programmers from worrying about where to read the input from and write the output to.  Most of the time, we can write the output of the program to the standard output.  In instances where we need to write the output to another location, we can just <em>redirect</em> the output.</p>
 <p>The operators <code>&gt;</code> and <code>&gt;&gt;</code> are used to redirect the standard output to a file.  The difference is that <code>&gt;</code> will overwrite the given file, while <code>&gt;&gt;</code> will concatenate into the given file.</p>
 <p>For example:
-<div class="highlight"><pre><span></span><code>$ wc test.txt &gt; test.count
+<pre class="highlight"><code>$ wc test.txt &gt; test.count
 $ cat test.count
-       1      11      64 test.txt
-</code></pre></div></p>
+       1      11      64 test.txt</code></pre></p>
 <p>The first command redirects the output from <code>wc</code> to a file named <code>test.count</code>, so you do not see anything printed to the output anymore.  We can check by running <code>cat</code> on the new file <code>test.count</code> -- indeed the original output from <code>wc</code> is now stored in the file <code>test.count</code>.</p>
 <p>If we repeat the command <code>wc test.txt &gt; test.count</code> again, you can see that the file has been
 overwritten with the output from <code>wc</code> again.  But if we replace <code>&gt;</code> with <code>&gt;&gt;</code>, a new line is concatenated into <code>test.count</code>.   So the file now has two lines.</p>
-<div class="highlight"><pre><span></span><code>$ wc test.txt &gt; test.count
+<pre class="highlight"><code>$ wc test.txt &gt; test.count
 $ cat test.count
        1      11      64 test.txt
 $ wc test.txt &gt;&gt; test.count
 $ cat test.count
        1      11      64 test.txt
-       1      11      64 test.txt
-</code></pre></div>
-
+       1      11      64 test.txt</code></pre>
 <h2 id="input-redirection">Input Redirection</h2>
 <p>The operator <code>&lt;</code> is used to redirect a file into the standard input. So, instead of reading from the keyboard, we can now read from a file.  Commands such as <code>cat</code> and <code>wc</code> already support from a file directly, so there is no difference in terms of functionality to run the commands by passing in the file name, or by using the <code>&lt;</code> operator.</p>
-<div class="highlight"><pre><span></span><code>$ wc test.txt
+<pre class="highlight"><code>$ wc test.txt
        1      11      64 test.txt
 $ wc &lt; test.txt
        1      11      64
 $ cat test.txt
 This is a test file for learning Unix file management commands.
 $ cat &lt; test.txt
-This is a test file for learning Unix file management commands.
-</code></pre></div>
-
+This is a test file for learning Unix file management commands.</code></pre>
 <p>Note the slight difference in the output format of the second <code>wc</code> above -- it no longer prints the file name since from <code>wc</code> points of view, it is read from the standard input and not from a file, so it is not aware of the file named <code>test.txt</code></p>
 <p>In most CS programming assignments, however, to keep things simple, you will be asked to read from the standard input only, so the <code>&lt;</code> is a great time-saver -- you do not have to repeatedly type in the same input data over and over from the keyboard.  You can just save the input data in a file, then redirect it to standard input with the <code>&lt;</code> operator.</p></div>
         

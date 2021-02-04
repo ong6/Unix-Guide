@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The website for Unix Workshop">
+    <meta name="description" content="All basic Unix commands">
     <meta name="author" content="Ooi Wei Tsang">
-    <link rel="canonical" href="https://nus-unix-workshop.github.io/2021-s1/pipe/">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/pipe/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     
-    <title>8. Composition with Pipe - UNIX 101</title>
+    <title>Unit 8: Composing Programs with `|` - Basic Unix for CS2030/S</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -57,7 +57,7 @@
 
             <!-- Main title -->
 
-            <a class="navbar-brand" href="..">UNIX 101</a>
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -68,12 +68,6 @@
                 
                     <li >
                         <a href="..">Home</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="../schedule/">Schedule</a>
                     </li>
                 
                 
@@ -94,102 +88,42 @@
 </li>
 
                         
-                            
-<li >
-    <a href="../tmate/">Setup tmate</a>
-</li>
-
-                        
                         </ul>
                     </li>
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../why-unix/">1. Why Unix?</a>
+    <a href="../basic-shell/">1. Terminal and Shell</a>
 </li>
 
                         
                             
 <li >
-    <a href="../why-cli/">2. Why CLI?</a>
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
 </li>
 
                         
                             
 <li >
-    <a href="../shell/">3. Terminal and Shell</a>
+    <a href="../basic-file-management/">3. File Management</a>
 </li>
 
                         
                             
 <li >
-    <a href="../path-nav/">4. Path and Navigation</a>
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
 </li>
 
                         
                             
 <li >
-    <a href="../file-management/">5. File Management</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../chmod/">6. File Permissions</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../stdio/">7. Standard I/O</a>
-</li>
-
-                        
-                            
-<li class="active">
-    <a href="./">8. Composition with Pipe</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../pattern/">9. Pattern Matching</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../efficiency/">10. Productivity with Unix</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../vim-intro/">11. Intro to Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../vim-practice/">12. Hands on with Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../script/">13. Bash Scripting</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../ssh/">14. Remote Servers</a>
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
 </li>
 
                         
@@ -203,12 +137,6 @@
                     </li>
                 
                 
-                
-                    <li >
-                        <a href="../zoom/">Zoom</a>
-                    </li>
-                
-                
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -217,18 +145,8 @@
                             <i class="fas fa-search"></i> Search
                         </a>
                     </li>
-                    <li >
-                        <a rel="prev" href="../stdio/">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="next" href="../pattern/">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
                     <li>
-                        <a href="https://github.com/nus-unix-workshop/2021-s1/edit/master/docs/pipe.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/pipe.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -259,45 +177,36 @@
 <p>Before Unix, operating systems tend to provide complex, monolithic, programs.  The philosophy of Unix, however, is to provide many small, simple, utility programs, that can be composed to complete a more complex task.  These small programs each do one thing only (and do it well) and so are easier to write and less prone to bugs.</p>
 <p>The composition of these utility programs relies on two things.  First, plain text is often used as input and output of the programs.  These allow the programs to understand each other easily.  Second, they use <code>|</code> to communicate with each other.  The <code>|</code> operator takes the standard output from one program and redirects it as the standard input of another program.</p>
 <p>For instance,
-<div class="highlight"><pre><span></span><code>$ cat test.txt | wc
-       1      11      64
-</code></pre></div>
+<pre class="highlight"><code>$ cat test.txt | wc
+       1      11      64</code></pre>
 compose <code>cat</code> and <code>wc</code> together.  Recall that <code>cat</code> reads the content of the file and prints it to standard output.  Here, we pipe the standard output from <code>cat</code> to <code>wc</code>.  So now, these printed texts are redirected as the standard input to <code>wc</code>.</p>
 <p>But this is just the same as
-<div class="highlight"><pre><span></span><code>$ wc &lt; test.txt
-</code></pre></div>
+<pre class="highlight"><code>$ wc &lt; test.txt</code></pre>
 that we have seen before.  What's the power in <code>|</code>?  </p>
 <p>Now, recall that we have made copies of <code>test.txt</code> earlier, into <code>foo.txt</code> and <code>bar.txt</code>.  If you have not done so or have removed them, you can quickly reproduce the files with:
-<div class="highlight"><pre><span></span><code>$ cp test.txt foo.txt
-$ cp test.txt bar.txt
-</code></pre></div></p>
+<pre class="highlight"><code>$ cp test.txt foo.txt
+$ cp test.txt bar.txt</code></pre></p>
 <p>Let's suppose now I want to count the total number of words for all three files.  Instead of calling <code>wc</code> on each file one by one, and sum them up myself.  I can just run:</p>
-<div class="highlight"><pre><span></span><code>$ cat test.txt foo.txt bar.txt | wc
-       3      33     192
-</code></pre></div>
-
+<pre class="highlight"><code>$ cat test.txt foo.txt bar.txt | wc
+       3      33     192</code></pre>
 <p>Here, <code>cat</code> read the three files, concatenate their content, and pass the output to <code>wc</code> for counting.</p>
 <h2 id="useful-utilities">Useful Utilities</h2>
 <p>Before we see more interesting examples of using <code>|</code>, let's move beyond <code>cat</code> and <code>wc</code>, and see what other simple tools are there in Unix.</p>
 <h3 id="head-and-tail"><code>head</code> and <code>tail</code></h3>
 <p><code>head</code> and <code>tail</code> prints out the first <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> lines and last <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> lines from a file (or standard input if the file name is not given).  By default, <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span> is 10, but you can pass in an argument to specify <span><span class="MathJax_Preview">k</span><script type="math/tex">k</script></span>.</p>
-<div class="highlight"><pre><span></span><code>$ cat test.txt foo.txt bar.txt
+<pre class="highlight"><code>$ cat test.txt foo.txt bar.txt
 This is a test file for learning Unix file management commands.
 This is a test file for learning Unix file management commands.
 This is a test file for learning Unix file management commands.
 $ cat test.txt foo.txt bar.txt | tail -1
-This is a test file for learning Unix file management commands.
-</code></pre></div>
-
+This is a test file for learning Unix file management commands.</code></pre>
 <h3 id="echo"><code>echo</code></h3>
 <p><code>echo</code> simply prints out the command-line argument to the standard output.</p>
-<div class="highlight"><pre><span></span><code>$ echo &quot;hello world!&quot;
-hello world!
-</code></pre></div>
-
+<pre class="highlight"><code>$ echo "hello world!"
+hello world!</code></pre>
 <h3 id="sort"><code>sort</code></h3>
 <p><code>sort</code> rearrange the input lines in alphabetical order.
-<div class="highlight"><pre><span></span><code>$ sort
+<pre class="highlight"><code>$ sort
 john
 jane
 peter
@@ -305,12 +214,11 @@ mary^D
 jane
 john
 mary
-peter
-</code></pre></div></p>
+peter</code></pre></p>
 <p>In the example above, I entered <code>john</code>, <code>jane</code>, <code>peter</code>, <code>mary</code> followed by <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-d">D</kbd></span> to signify the end of input.  <code>sort</code> prints out <code>jane</code>, <code>john</code>, <code>mary</code>, <code>peter</code>, in that order.</p>
 <h3 id="uniq"><code>uniq</code></h3>
 <p><code>uniq</code> remove any two consecutive lines that are the same.</p>
-<div class="highlight"><pre><span></span><code>$ uniq
+<pre class="highlight"><code>$ uniq
 1
 2
 2
@@ -319,21 +227,17 @@ peter
 1^D
 1
 2
-1
-</code></pre></div>
-
+1</code></pre>
 <p>For instance, in the above, there are three consecutive lines of <code>2</code>, so only one remained.  There are also two consecutive lines of <code>1</code>, so only one remained.`</p>
 <h3 id="grep"><code>grep</code></h3>
 <p><code>grep</code> returns the lines of text from the given file (or the standard input) that matches the given string.  For instance, run</p>
-<div class="highlight"><pre><span></span><code>$ grep abc
-</code></pre></div>
-
+<pre class="highlight"><code>$ grep abc</code></pre>
 <p>and start typing in some lines of text, some containing <code>abc</code>, some do not.  <code>grep</code> will spew out into the standard output all the lines that contain the text <code>abc</code> somewhere.  As usual,
 hit <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-d">D</kbd></span> when you are done.</p>
 <h2 id="pipe-example">Pipe Example</h2>
 <p>To give you an example of how useful <code>|</code> is, here is a real example.  When processing the registration of the workshop, I have quite a few registrations that are duplicates -- students registered more than ones.  I need a quick way to count how many unique registrants are there.
 So I keep the student id of all registrants in a file called <code>ID</code>.  For instance, the file <code>ID</code> contains (not real data, of course)</p>
-<div class="highlight"><pre><span></span><code>A1234567X,CS
+<pre class="highlight"><code>A1234567X,CS
 A1234559A,CEG
 A1239999J,CEG
 A1234580K,CEG
@@ -341,18 +245,13 @@ A1233210O,CS
 A1234567X,CS
 A1234581Q,ISC
 A1233216T,ISC
-A1239999J,CEG
-</code></pre></div>
-
+A1239999J,CEG</code></pre>
 <p>Now, to count how many unique registrants, I just need to run:</p>
-<div class="highlight"><pre><span></span><code>$ cat ID | sort | uniq | wc -l
-    7
-</code></pre></div>
-
+<pre class="highlight"><code>$ cat ID | sort | uniq | wc -l
+    7</code></pre>
 <p>To count how many uniq registrants are <code>CEG</code> students, I just change it to:
-<div class="highlight"><pre><span></span><code>$ cat ID | sort | uniq | grep CEG | wc -l
-    3
-</code></pre></div></p></div>
+<pre class="highlight"><code>$ cat ID | sort | uniq | grep CEG | wc -l
+    3</code></pre></p></div>
         
         
     </div>

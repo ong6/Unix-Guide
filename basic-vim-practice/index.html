@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/basic-vim-practice/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>5. Hands on with Vim - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">5. Hands on with Vim</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../basic-vim-intro/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../extra/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/basic-vim-practice.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#unit-5-getting-started-with-vim">Unit 5: Getting Started with vim</a></li>
+            <li class="second-level"><a href="#setting-up-your-vim-environment">Setting Up Your vim Environment</a></li>
+                
+            <li class="second-level"><a href="#lesson-1-navigation">Lesson 1: Navigation</a></li>
+                
+            <li class="second-level"><a href="#lesson-2-manipulating-text">Lesson 2: Manipulating Text</a></li>
+                
+                <li class="third-level"><a href="#deletion">Deletion</a></li>
+                <li class="third-level"><a href="#copy-pasting">Copy Pasting</a></li>
+                <li class="third-level"><a href="#deleting-a-character">Deleting a Character</a></li>
+                <li class="third-level"><a href="#visual-mode">Visual Mode</a></li>
+                <li class="third-level"><a href="#the-command">The : command</a></li>
+            <li class="second-level"><a href="#lesson-3-insert-mode">Lesson 3: Insert mode!</a></li>
+                
+            <li class="second-level"><a href="#learning-more">Learning More</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="unit-5-getting-started-with-vim">Unit 5: Getting Started with <code>vim</code></h1>
+<h2 id="setting-up-your-vim-environment">Setting Up Your <code>vim</code> Environment</h2>
+<p>Like many other Unix programs, you can configure your preferences by creating an
+<code>rc</code> (run commands) file in your home directory. These <code>rc</code> files will be read
+by the corresponding programs and executed line-by-line as if the text is
+entered into the program through a keyboard. You can view these <code>rc</code> as a script
+that will be executed automatically whenever a program starts.</p>
+<p>For <code>vim</code>, the <code>rc</code> file is called <code>.vimrc</code>. The <code>.</code> in the front of the file
+name carries a special meaning in Unix. It means that this file is hidden -- you
+won't see it when you <code>ls</code>. Hiding the run command files prevent your home
+directory from being cluttered. To tell <code>ls</code> to show the hidden files, use the
+<code>-a</code> flag</p>
+<pre class="highlight"><code>$ ls -a</code></pre>
+<p>We have created a <code>.vimrc</code> file, with reasonable defaults, for your use. Note
+that different modules may choose to use a different coding convention and so a
+different setting. But this <code>.vimrc</code> file suffices for now.</p>
+<p>To get this file,</p>
+<pre class="highlight"><code>$ cd
+$ mv .vimrc .vimrc.bak
+$ mkdir .backup
+$ wget https://raw.githubusercontent.com/nus-unix-workshop/2021-s1/master/.vimrc</code></pre>
+<p>The first line changes your working directory to your home. The second line
+creates a backup <code>.vimrc</code>, if one exists. If it does not, <code>mv</code> will give you an
+error, which is fine. The third line creates a hidden backup directory for
+<code>vim</code>. The last line downloads our <code>.vimrc</code> into your home directory.</p>
+<p>Our default <code>.vimrc</code> set up <code>vim</code> such that it creates a backup copy of the file
+you are editing every time and store it in <code>~/.backup</code>. This feature has saved
+me from pulling my hair out countless times. It is highly recommended that you
+set this up whenever you <code>vim</code>.</p>
+<h2 id="lesson-1-navigation">Lesson 1: Navigation</h2>
+<p>Now, you can stay in your home directory or go back to your workshop directory.</p>
+<p>Download the following file for practice using <code>vim</code> in this session.</p>
+<pre class="highlight"><code>$ wget https://raw.githubusercontent.com/nus-unix-workshop/2021-s1/master/jfk.txt</code></pre>
+<p>The file named <code>jfk.txt</code> should be downloaded. Now let's start your first <code>vim</code>
+session.</p>
+<pre class="highlight"><code>$ vim jfk.txt</code></pre>
+<p>When you start, you will be in <code>NORMAL</code> mode. For now, just move around the
+cursor with <span class="keys"><kbd class="key-h">H</kbd></span> <span class="keys"><kbd class="key-j">J</kbd></span> <span class="keys"><kbd class="key-k">K</kbd></span> <span class="keys"><kbd class="key-l">L</kbd></span>. Get comfortable with using the keys.</p>
+<p>Next, try <span class="keys"><kbd class="key-parenthesis-left">(</kbd></span> and <span class="keys"><kbd class="key-parenthesis-right">)</kbd></span> to move forward and
+backward, sentence-by-sentence.</p>
+<p>Next, try <span class="keys"><kbd class="key-brace-left">{</kbd></span> and <span class="keys"><kbd class="key-brace-right">}</kbd></span> to move forward and backward,
+paragraph-by-paragraph.</p>
+<p>Use <span class="keys"><kbd class="key-0">0</kbd></span> to jump to the beginning of the line, and <span class="keys"><kbd class="key-dollar">$</kbd></span> to jump to the
+end of the line.</p>
+<p>Use <span class="keys"><kbd class="key-g">G</kbd><span>+</span><kbd class="key-g">G</kbd></span> to jump to the beginning of the file, and <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-g">G</kbd></span> (<code>G</code>) to jump
+to the last line of the file.</p>
+<p>Now try <span class="keys"><kbd class="key-slash">/</kbd></span>, type in any word (or prefix of a word) and <span class="keys"><kbd class="key-enter">Enter</kbd></span>. This
+should move the cursor to the beginning of the word. You can use <span class="keys"><kbd class="key-n">N</kbd></span> and
+<span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-n">N</kbd></span> to move to the next match and the previous match.</p>
+<p>When you are comfortable with moving around, you can <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-z">Z</kbd><span>+</span><kbd class="key-z">Z</kbd></span> to exit.</p>
+<p>Congratulations, you have just completed your first session in <code>vim</code>!</p>
+<h2 id="lesson-2-manipulating-text">Lesson 2: Manipulating Text</h2>
+<p>Now, we are going to open up the same file again and try to manipulate the text.
+We are going to stay in the <code>NORMAL</code> mode still.</p>
+<pre class="highlight"><code>$ vim jfk.txt</code></pre>
+<h3 id="deletion">Deletion</h3>
+<p>Try <span class="keys"><kbd class="key-0">0</kbd></span> <span class="keys"><kbd class="key-d">D</kbd></span> <span class="keys"><kbd class="key-3">3</kbd></span> <span class="keys"><kbd class="key-w">W</kbd></span> to move the cursor to the beginning of the line and
+delete three words.</p>
+<p>Press <span class="keys"><kbd class="key-u">U</kbd></span> to undo. This is another lifesaver that you should remember.</p>
+<p>In <code>vim</code>, repeating the same command twice usually means applying it to the
+whole line. So <span class="keys"><kbd class="key-d">D</kbd></span> <span class="keys"><kbd class="key-d">D</kbd></span> deletes the current line. Try that.</p>
+<p>Pairing a command with <span class="keys"><kbd class="key-shift">Shift</kbd></span> (or the capital letter version) usually means
+applying the action until the end of the line. So <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-d">D</kbd></span> deletes from the
+current cursor until the end of the line.</p>
+<h3 id="copy-pasting">Copy Pasting</h3>
+<p>Hit <span class="keys"><kbd class="key-p">P</kbd></span> to paste back what you just deleted. Try moving the cursor to
+somewhere else and paste.</p>
+<p>To copy (or yank) the current line, hit <span class="keys"><kbd class="key-y">Y</kbd></span> <span class="keys"><kbd class="key-y">Y</kbd></span>.</p>
+<p>Remember that all these commands can be composed using the
+movement-action-movement pattern. For instance, <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-9">9</kbd></span> <span class="keys"><kbd class="key-y">Y</kbd></span> <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-0">0</kbd></span>,
+which corresponds to: move to the beginning of the sentence, yank, and until the
+end of the sentence, basically copy the current sentence.</p>
+<p>As you have seen in the <span class="keys"><kbd class="key-d">D</kbd></span> <span class="keys"><kbd class="key-2">2</kbd></span> <span class="keys"><kbd class="key-w">W</kbd></span> example, you can preceed an action
+with a number to repeat an action multiple times.</p>
+<p>Try <span class="keys"><kbd class="key-y">Y</kbd></span> <span class="keys"><kbd class="key-y">Y</kbd></span> <span class="keys"><kbd class="key-9">9</kbd></span> <span class="keys"><kbd class="key-p">P</kbd></span>. You should be able to understand what just
+happened!</p>
+<h3 id="deleting-a-character">Deleting a Character</h3>
+<p>The <span class="keys"><kbd class="key-x">X</kbd></span> command deletes the current character.</p>
+<p>Try this exercise: At the end of the file <code>jfk.txt</code>, there are some typos:</p>
+<pre class="highlight"><code>libertyi. liberty.</code></pre>
+<p>Change <code>libertyi. liberty.</code> to <code>libtery.</code> by positioning the cursor on the
+second <code>i</code> and delete it. Then use <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-d">D</kbd></span> to delete the extra <code>liberty.</code> at
+the end of the sentence.</p>
+<h3 id="visual-mode">Visual Mode</h3>
+<p>In addition to the <code>INSERT</code> and <code>NORMAL</code> modes, <code>vim</code> has the third mode, the
+<code>VISUAL</code> mode. You can enter the <code>VISUAL</code> mode by hitting <span class="keys"><kbd class="key-v">V</kbd></span>. Once in visual
+mode, you can move your cursor to select the text and perform some actions on it
+(e.g., <span class="keys"><kbd class="key-d">D</kbd></span> or <span class="keys"><kbd class="key-x">X</kbd></span> to delete, <span class="keys"><kbd class="key-y">Y</kbd></span> to yank).</p>
+<p>Hitting <span class="keys"><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-v">V</kbd></span> will allow you to select line-by-line.</p>
+<p>The <code>VISUAL</code> mode allows us to pipe the selected text to another Unix command,
+and replace it with the result of that command.</p>
+<p>Go ahead and try to select a paragraph in <code>jfk.txt</code>, and hit <span class="keys"><kbd class="key-colon">:</kbd></span>. You will
+see that</p>
+<pre class="highlight"><code>:'&lt;,'&gt;</code></pre>
+<p>appears in the last line of the terminal. At this point, you can type in actions
+that you want to perform on the selected text. For instance,</p>
+<pre class="highlight"><code>:'&lt;,'&gt;w john.txt</code></pre>
+<p>will write it to a file named <code>john.txt</code>.</p>
+<p>But, let's try the following:</p>
+<pre class="highlight"><code>:'&lt;,'&gt;!fmt</code></pre>
+<p><code>!fmt</code> tells <code>vim</code> to invoke the shell and run <code>fmt</code>. <code>fmt</code> is another simple
+small Unix utility that takes in a text (from standard input) and spew out
+formatted text in the standard output. You will see that the width of the text
+has changed to the default of 65.</p>
+<p>You can try something that we have seen before. Reselect the text, and hit</p>
+<pre class="highlight"><code>:'&lt;,'&gt;!wc</code></pre>
+<p>The selected text will be replaced with the output from <code>wc</code>.</p>
+<h3 id="the-command">The <code>:</code> command</h3>
+<p>You have seen examples of <code>:</code> commands for writing to a file or piping selected
+text to an external command.</p>
+<p>The <code>:</code> command also opens up a large number of actions you can do in <code>vim</code>.
+Here are a few essential yet simple commands.</p>
+<ul>
+<li>To jump to a line, hit <span class="keys"><kbd class="key-colon">:</kbd></span> followed by the line number.</li>
+<li>To open another file, hit <span class="keys"><kbd class="key-colon">:</kbd></span> and then type in <code>e &lt;filename&gt;</code></li>
+<li>To find help on a topic, hit <span class="keys"><kbd class="key-colon">:</kbd></span> and then type in <code>help &lt;keyword&gt;</code></li>
+</ul>
+<p>Other advanced features such as search-and-replace, changing preferences,
+splitting windows, opening new tabs, are also accessible from the <code>:</code> command.</p>
+<p>The <code>:</code> command prompt supports <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-p">P</kbd></span> and <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-n">N</kbd></span> for navigating
+back and forth your command history, just like <code>bash</code>. It also supports <span class="keys"><kbd class="key-tab">Tab</kbd></span>
+for auto-completion.</p>
+<h2 id="lesson-3-insert-mode">Lesson 3: Insert mode!</h2>
+<p>Finally, we are going to try inserting some text. Remember, to use <code>INSERT</code>
+mode, we always start with a command <span class="keys"><kbd class="key-i">I</kbd></span> <span class="keys"><kbd class="key-a">A</kbd></span> <span class="keys"><kbd class="key-o">O</kbd></span> or <span class="keys"><kbd class="key-s">S</kbd></span> (may paired with
+<span class="keys"><kbd class="key-shift">Shift</kbd></span>) followed by the text that you want to insert, followed by <span class="keys"><kbd class="key-escape">Esc</kbd></span>.</p>
+<p>Let's try <span class="keys"><kbd class="key-i">I</kbd></span> (insert). Place your cursor anywhere, hit <span class="keys"><kbd class="key-i">I</kbd></span>, and start
+typing, when you are done. Hit <span class="keys"><kbd class="key-escape">Esc</kbd></span>.</p>
+<p>You just added some text to the file.</p>
+<p>Place your cursor anywhere, hit <span class="keys"><kbd class="key-a">A</kbd></span> (append), and start typing, when you are
+done. Hit <span class="keys"><kbd class="key-escape">Esc</kbd></span>. <span class="keys"><kbd class="key-a">A</kbd></span> appends the text to the end of the current line.</p>
+<p>Hit <span class="keys"><kbd class="key-o">O</kbd></span> (open) and start typing, when you are done. Hit <span class="keys"><kbd class="key-escape">Esc</kbd></span>. <span class="keys"><kbd class="key-o">O</kbd></span> opens
+up a new line for the your text.</p>
+<p>Hit <span class="keys"><kbd class="key-s">S</kbd></span> (substitute) and start typing, when you are done. Hit <span class="keys"><kbd class="key-escape">Esc</kbd></span>. <span class="keys"><kbd class="key-s">S</kbd></span>
+substitute the current character with your text.</p>
+<p>Now try it with <span class="keys"><kbd class="key-shift">Shift</kbd></span> and see the difference in behavior.</p>
+<h2 id="learning-more">Learning More</h2>
+<p>There is only so much we can cover in 30 minutes. This workshop only covers the
+tip of the iceberg. To learn more about <code>vim</code>, we suggest that you run
+<code>vimtutor</code> on the command line and follow through the tutorials.</p>
+<p>Once you are comfortable, you can soup up your <code>vim</code> with various plugins and
+learn how to use advanced commands (such as search and replace, jumping between
+files, recording macros, folding, auto-completion) that are invaluable for
+programming.</p>
+<p>There are also many video tutorials and resources online. Some interesting ones
+are:</p>
+<ul>
+<li><a href="https://vimeo.com/53144573">Vim: Precision Editing at the Speed of Thought</a>:
+  A talk by Drew Neil</li>
+<li><a href="https://www.vim-adventures.com">Vim Adventure</a>: An adventure game for
+  learning <code>vim</code></li>
+<li><a href="http://vimcasts.org/episodes/archive/">Vim Casts</a>: Videos and articles for
+  teaching <code>vim</code></li>
+<li><a href="http://derekwyatt.org/vim/tutorials/">Vim Video Tutorials</a> by Derek Wyatt</li>
+<li><a href="https://vimawesome.com/">Vim Awesome</a>: Directory of plugins.</li>
+</ul></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

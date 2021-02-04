@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="The website for Unix Workshop">
+    <meta name="description" content="All basic Unix commands">
     <meta name="author" content="Ooi Wei Tsang">
-    <link rel="canonical" href="https://nus-unix-workshop.github.io/2021-s1/efficiency/">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/efficiency/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     
-    <title>10. Productivity with Unix - UNIX 101</title>
+    <title>Unit 10: Leveling Up Your Productivity with CLI - Basic Unix for CS2030/S</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -57,7 +57,7 @@
 
             <!-- Main title -->
 
-            <a class="navbar-brand" href="..">UNIX 101</a>
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
         </div>
 
         <!-- Expanded navigation -->
@@ -68,12 +68,6 @@
                 
                     <li >
                         <a href="..">Home</a>
-                    </li>
-                
-                
-                
-                    <li >
-                        <a href="../schedule/">Schedule</a>
                     </li>
                 
                 
@@ -94,102 +88,42 @@
 </li>
 
                         
-                            
-<li >
-    <a href="../tmate/">Setup tmate</a>
-</li>
-
-                        
                         </ul>
                     </li>
                 
                 
                 
-                    <li class="dropdown active">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
 <li >
-    <a href="../why-unix/">1. Why Unix?</a>
+    <a href="../basic-shell/">1. Terminal and Shell</a>
 </li>
 
                         
                             
 <li >
-    <a href="../why-cli/">2. Why CLI?</a>
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
 </li>
 
                         
                             
 <li >
-    <a href="../shell/">3. Terminal and Shell</a>
+    <a href="../basic-file-management/">3. File Management</a>
 </li>
 
                         
                             
 <li >
-    <a href="../path-nav/">4. Path and Navigation</a>
+    <a href="../basic-vim-intro/">4. Intro to Vim</a>
 </li>
 
                         
                             
 <li >
-    <a href="../file-management/">5. File Management</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../chmod/">6. File Permissions</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../stdio/">7. Standard I/O</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../pipe/">8. Composition with Pipe</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../pattern/">9. Pattern Matching</a>
-</li>
-
-                        
-                            
-<li class="active">
-    <a href="./">10. Productivity with Unix</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../vim-intro/">11. Intro to Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../vim-practice/">12. Hands on with Vim</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../script/">13. Bash Scripting</a>
-</li>
-
-                        
-                            
-<li >
-    <a href="../ssh/">14. Remote Servers</a>
+    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
 </li>
 
                         
@@ -203,12 +137,6 @@
                     </li>
                 
                 
-                
-                    <li >
-                        <a href="../zoom/">Zoom</a>
-                    </li>
-                
-                
                 </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -217,18 +145,8 @@
                             <i class="fas fa-search"></i> Search
                         </a>
                     </li>
-                    <li >
-                        <a rel="prev" href="../pattern/">
-                            <i class="fas fa-arrow-left"></i> Previous
-                        </a>
-                    </li>
-                    <li >
-                        <a rel="next" href="../vim-intro/">
-                            Next <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </li>
                     <li>
-                        <a href="https://github.com/nus-unix-workshop/2021-s1/edit/master/docs/efficiency.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/efficiency.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -267,35 +185,27 @@ only need move <em>our fingers</em> to type.  </p>
 </ul>
 <p>There are many more <code>bash</code> shortcuts for productivity, if you are keen, take a look here: <a href="https://github.com/fliptheweb/bash-shortcuts-cheat-sheet">https://github.com/fliptheweb/bash-shortcuts-cheat-sheet</a></p>
 <p>You have also seen in Day 1 of the workshop that Unix has many small, simple, utilities that we can compose to solve a task.  But composing them requires much typing:</p>
-<div class="highlight"><pre><span></span><code>$ cat ID | sort | uniq | grep CEG | wc -l
-</code></pre></div>
-
+<pre class="highlight"><code>$ cat ID | sort | uniq | grep CEG | wc -l</code></pre>
 <p>If we need to run this over and over again or share this command with someone, we can simply put these commands in a file, and then run it by invoking its name.  Such a file containing commands for the shell is called a <em>shell script</em>.</p>
 <p>For example, let's create a file named <code>hello.sh</code> containing the line <code>echo hello!</code> by:
-<div class="highlight"><pre><span></span><code>$ cat &gt; hello.sh
-echo hello!^D
-</code></pre></div></p>
+<pre class="highlight"><code>$ cat &gt; hello.sh
+echo hello!^D</code></pre></p>
 <p>The extension <code>.sh</code> is not necessary but it is just something I use so that I can tell that this file contains a shell script.  In the example above, <code>cat</code> will wait for me to enter something on the keyboard.  So I entered <code>echo hello!</code> followed by <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-d">D</kbd></span> to indicate the end of the input.</p>
 <p>Now, to execute this file, we run:
-<div class="highlight"><pre><span></span><code>$ bash hello.sh
-hello!
-</code></pre></div>
+<pre class="highlight"><code>$ bash hello.sh
+hello!</code></pre>
 or
-<div class="highlight"><pre><span></span><code>$ bash &lt; hello.sh
-hello!
-</code></pre></div></p>
+<pre class="highlight"><code>$ bash &lt; hello.sh
+hello!</code></pre></p>
 <p>Recall that we said Unix shells do not necessarily interact with the users?  This is an example.  We pass the file <code>hello.sh</code> to <em>a new instance of <code>bash</code></em>, asking it to interpret the lines inside this file as commands to execute.  </p>
 <p>Remember that we want to minimize typing, so can we run it with less typing?  What if we can just pass the filename directly to <code>bash</code> to execute?</p>
-<div class="highlight"><pre><span></span><code>$ ./hello.sh
-bash: ./hello.sh: Permission denied
-</code></pre></div>
-
+<pre class="highlight"><code>$ ./hello.sh
+bash: ./hello.sh: Permission denied</code></pre>
 <p>Here, we specify the relative path of the script <code>hello.sh</code>, including the prefix <code>./</code> (for reasons that we will explain later).  But we should get an
 error telling us <code>Permission defined</code>.  Recall from the <a href="../chmod/"><code>File Permissions</code></a> unit that a file needs to have the executable <code>x</code> permission to be executed.  So we need to add this permission for ourselves:
-<div class="highlight"><pre><span></span><code>$ chmod u+x hello.sh
+<pre class="highlight"><code>$ chmod u+x hello.sh
 $ ./hello.sh
-hello!
-</code></pre></div></p>
+hello!</code></pre></p>
 <p>Now we can run our script without typing <code>bash</code>.  We can remove <code>./</code> as well, but we will learn about that only when we talk about <a href="../script/"><code>environment variables</code></a>.</p>
 <div class="footnote">
 <hr />
