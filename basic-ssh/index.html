@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="All basic Unix commands">
     <meta name="author" content="Ooi Wei Tsang">
-    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/schedule/">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/basic-ssh/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     
-    <title>Tentative Schedule for Unix@Home Workshop - Basic Unix for CS2030/S</title>
+    <title>6. SSH and Remote Access - Basic Unix for CS2030/S</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -78,7 +78,7 @@
                         
                             
 <li >
-    <a href="../wsl/">Setup for Windows 10</a>
+    <a href="../basic-wsl/">Setup for Windows 10</a>
 </li>
 
                         
@@ -93,7 +93,7 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
@@ -117,13 +117,25 @@
                         
                             
 <li >
-    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+    <a href="../basic-vim-intro/">4. Vim Basics</a>
 </li>
 
                         
                             
 <li >
-    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+    <a href="../basic-vim-practice/">5. Vim Practice</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">6. SSH and Remote Access</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../tmux/">7. tmux</a>
 </li>
 
                         
@@ -133,7 +145,7 @@
                 
                 
                     <li >
-                        <a href="../cheat-sheet/">Jun Xiong's CheatSheet</a>
+                        <a href="../cheat-sheet/">Unix Cheat Sheet</a>
                     </li>
                 
                 
@@ -151,8 +163,18 @@
                             <i class="fas fa-search"></i> Search
                         </a>
                     </li>
+                    <li >
+                        <a rel="prev" href="../basic-vim-practice/">
+                            <i class="fas fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../tmux/">
+                            Next <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </li>
                     <li>
-                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/schedule.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/basic-ssh.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -164,74 +186,102 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#tentative-schedule-for-unixhome-workshop">Tentative Schedule for Unix@Home Workshop</a></li>
-            <li class="second-level"><a href="#day-1">Day 1</a></li>
+        <li class="first-level active"><a href="#accessing-remote-shell">Accessing Remote Shell</a></li>
+            <li class="second-level"><a href="#sunfire">sunfire</a></li>
                 
-                <li class="third-level"><a href="#plenary-session-1-introduction-20-minutes">Plenary Session 1: Introduction (20 minutes)</a></li>
-                <li class="third-level"><a href="#breakout-session-2-basic-unix-files-operations-i-30-minutes">Breakout Session 2: Basic Unix Files Operations I (30 minutes)</a></li>
-                <li class="third-level"><a href="#breakout-session-3-basic-unix-files-operations-ii-20-minutes">Breakout Session 3:  Basic Unix Files Operations II (20 minutes)</a></li>
-                <li class="third-level"><a href="#breakout-session-4-composition-30-minutes">Breakout Session 4: Composition (30 minutes)</a></li>
-            <li class="second-level"><a href="#day-2">DAY 2</a></li>
+            <li class="second-level"><a href="#pe-node-for-cs2030s">PE node (for CS2030/S)</a></li>
                 
-                <li class="third-level"><a href="#plenary-session-5-gaining-efficiency-with-unix-20-minutes">Plenary Session 5: Gaining Efficiency with Unix (20 minutes)</a></li>
-                <li class="third-level"><a href="#breakout-session-5-simple-file-editing-with-vim-30-minutes">Breakout Session 5: Simple file editing with vim (30 minutes)</a></li>
-                <li class="third-level"><a href="#breakout-session-6-very-basic-shell-scripts-30-minutes">Breakout Session 6: Very Basic Shell Scripts (30 minutes)</a></li>
-                <li class="third-level"><a href="#breakout-session-8-remote-servers-20-minutes">Breakout Session 8: Remote Servers (20 minutes)</a></li>
-                <li class="third-level"><a href="#plenary-session-9-conclusion-10-minutes">Plenary Session 9: Conclusion (10 minutes)</a></li>
+            <li class="second-level"><a href="#secure-shell">Secure Shell</a></li>
+                
+            <li class="second-level"><a href="#transferring-files-back-and-forth">Transferring Files Back and Forth</a></li>
+                
+            <li class="second-level"><a href="#logging-in-without-password">Logging in without Password</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="tentative-schedule-for-unixhome-workshop">Tentative Schedule for Unix@Home Workshop</h1>
-<p>(Note: Allocated time is a very rough approxmiate)</p>
-<h2 id="day-1">Day 1</h2>
-<h3 id="plenary-session-1-introduction-20-minutes">Plenary Session 1: Introduction (20 minutes)</h3>
-<ul>
-<li>1: <a href="../why-unix/">What is Unix?  Why are we learning/using Unix?</a></li>
-<li>2: <a href="../why-cli/">What is CLI? Why are we learning/using CLI?</a></li>
-<li>3: <a href="../shell/">What is a terminal? What is a shell?</a></li>
-</ul>
-<h3 id="breakout-session-2-basic-unix-files-operations-i-30-minutes">Breakout Session 2: Basic Unix Files Operations I (30 minutes)</h3>
-<ul>
-<li>Setup a Unix computing environment on <a href="../wsl/">Windows 10</a> or <a href="../mac/">macOS</a></li>
-<li><a href="../tmate/">Installing tmate for terminal sharing</a></li>
-<li>4: <a href="../path-nav/">Directories, paths, and navigation</a></li>
-</ul>
-<h4 id="break-20-minutes">Break (20 minutes)</h4>
-<h3 id="breakout-session-3-basic-unix-files-operations-ii-20-minutes">Breakout Session 3:  Basic Unix Files Operations II (20 minutes)</h3>
-<ul>
-<li>5: <a href="../file-management/">File management</a></li>
-<li>6: <a href="../chmod/">Permission management</a></li>
-</ul>
-<h4 id="break-20-minutes_1">Break (20 minutes)</h4>
-<h3 id="breakout-session-4-composition-30-minutes">Breakout Session 4: Composition (30 minutes)</h3>
-<ul>
-<li>7: <a href="../stdio/">Standard I/O</a></li>
-<li>8: <a href="../pipe/">Piping</a></li>
-<li>9: <a href="../pattern/">Pattern Matching</a></li>
-</ul>
-<h2 id="day-2">DAY 2</h2>
-<h3 id="plenary-session-5-gaining-efficiency-with-unix-20-minutes">Plenary Session 5: Gaining Efficiency with Unix (20 minutes)</h3>
-<ul>
-<li>10: <a href="../efficiency/">Producitivity with Unix</a></li>
-<li>11: <a href="../vim-intro/">The philosophy and power of <code>vim</code></a></li>
-</ul>
-<h3 id="breakout-session-5-simple-file-editing-with-vim-30-minutes">Breakout Session 5: Simple file editing with vim (30 minutes)</h3>
-<ul>
-<li>12: <a href="vim-practice.md">Hands-on with <code>vim</code></a></li>
-</ul>
-<h4 id="break-20-minutes_2">Break (20 minutes)</h4>
-<h3 id="breakout-session-6-very-basic-shell-scripts-30-minutes">Breakout Session 6: Very Basic Shell Scripts (30 minutes)</h3>
-<ul>
-<li>13: <a href="../script/">Bash Configuration and Scripting</a></li>
-</ul>
-<h4 id="break-20-minutes_3">Break (20 minutes)</h4>
-<h3 id="breakout-session-8-remote-servers-20-minutes">Breakout Session 8: Remote Servers (20 minutes)</h3>
-<ul>
-<li>14: <a href="../ssh/">Accessing Remote Servers</a></li>
-</ul>
-<h4 id="break-20-minutes_4">Break (20 minutes)</h4>
-<h3 id="plenary-session-9-conclusion-10-minutes">Plenary Session 9: Conclusion (10 minutes)</h3></div>
+<h1 id="accessing-remote-shell">Accessing Remote Shell</h1>
+<p>So far, we have been accessing the Unix computing environment locally, on your
+laptop or desktop computer.</p>
+<p>Using the shell, however, opens up a whole new world -- you can now access a
+remote computer over the Internet using the same interface.</p>
+<p>Let's try this out, using one of the two remote servers:</p>
+<h3 id="sunfire">sunfire</h3>
+<p>A Unix computing server called <code>sunfire</code>, hosted by the School of Computing. To
+access this, you need to have a SoC Unix Account. If you do not have one yet,
+you can create a new account here: <a href="https://mysoc.nus.edu.sg/~newacct">https://mysoc.nus.edu.sg/~newacct</a></p>
+<p>After that, activate "General Unix Servers" and "The SoC Compute Cluster" in
+MySoC here: <a href="https://mysoc.nus.edu.sg/~myacct/services.cgi">https://mysoc.nus.edu.sg/~myacct/services.cgi</a></p>
+<p><code>sunfire</code> is a shared machine running Solaris.</p>
+<p>To log into <code>sunfire</code>, type:</p>
+<pre class="highlight"><code>$ ssh sunfire.comp.nus.edu.sg</code></pre>
+<p>or</p>
+<pre class="highlight"><code>$ ssh &lt;username&gt;@sunfire.comp.nus.edu.sg</code></pre>
+<p>The first option above assumes your SoC Unix account name is the same as your
+username on your local machine (Remember we advised you to choose the same
+username when you installed WSL? This is why!). In the second option, we have to
+explicitly provide our user name. For instance,</p>
+<pre class="highlight"><code>$ ssh bob@sunfire.comp.nus.edu.sg</code></pre>
+<h3 id="pe-node-for-cs2030s">PE node (for CS2030/S)</h3>
+<p>To access your PE node, use the following command:</p>
+<pre class="highlight"><code>$ ssh plabXXXX@peYYY</code></pre>
+<p>These commands are too long to type so you could add an alias for this command
+into your <code>~/.bashrc</code>.</p>
+<h2 id="secure-shell">Secure Shell</h2>
+<p><code>ssh</code> stands for secure shell. It is called secure as it encrypts all
+communications between you and the remote server. It is an efficient way to
+access a remote computer since only texts are transmitted, not graphics.</p>
+<p>The first time you access a remote computer using <code>ssh</code>, it will ask you a
+question, which looks sometimes like this:</p>
+<pre class="highlight"><code>The authenticity of host 'sunfire (137.132.80.55)' can't be established.
+RSA key fingerprint is SHA256:UUyiI25neTV5AT/q3CJi0BAA4ztfo+7doi77bkzpLJ4.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+<p>Type <code>yes</code> then hit <span class="keys"><kbd class="key-enter">Enter</kbd></span>. You won't be asked the same question again.</p>
+<p>Once you log in, you will be presented the same interface as you are used to --
+a command prompt. You can do everything that you have learned at this command
+prompt, with the only difference being you are doing it on a remote computer
+(aka remote <em>host</em> or remote <em>server</em>).</p>
+<h2 id="transferring-files-back-and-forth">Transferring Files Back and Forth</h2>
+<p>Secure copy, or <code>scp</code>, is one way to transfer files between the remote host and
+your local computer for archiving or storage. Let's say you want to transfer
+jfk.txt from the current working directory to your remote directory, then, on
+your local computer, run:</p>
+<pre class="highlight"><code>$ scp jfk.txt sunfire.comp.nus.edu.sg:~/</code></pre>
+<p><code>scp</code> behaves just like <code>cp</code>, except that we add <code>sunfire.comp.nus.edu.sg:</code> in
+front of a path (add <code>&lt;username&gt;@</code> as necessary) to indicate the name of the
+remote host to copy the files to. The path <code>~/</code> now refers to the home directory
+on the remote host.</p>
+<p>If you have files with the same name in the remote directory, the files will be
+overwritten without warning. I have lost my code a few times due to <code>scp</code>.</p>
+<p><code>scp</code> supports <code>-r</code> (recursive copy) as well.</p>
+<h2 id="logging-in-without-password">Logging in without Password</h2>
+<p>On login, you will have to key in your password. Hence, if you want to open
+multiple tabs, you will have to login every time. To save time, you can add your
+RSA (Rivest–Shamir–Adleman) key into the server and never have to use your
+password again.</p>
+<p>First, run:</p>
+<pre class="highlight"><code>$ ssh-keygen -t rsa</code></pre>
+<p>Afterwards, this should show up, just click enter for each of the inputs (don't
+enter in any values)</p>
+<pre class="highlight"><code>Enter file in which to save the key (/home/junxi/.ssh/id_rsa):
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:</code></pre>
+<p>Then you should get a notification that looks something like this:</p>
+<pre class="highlight"><code>Your identification has been saved in /home/junxi/.ssh/id_rsa
+Your public key has been saved in /home/junxi/.ssh/id_rsa.pub</code></pre>
+<p>Now go to the directory which the RSA key is stored:</p>
+<pre class="highlight"><code>$ cd ~/.ssh/
+$ cat id_ras.pub</code></pre>
+<p>Your key should look like a bunch of random letters and numbers with a <code>ssh-rsa</code>
+in front. Now we copy the files over to the sunfire/pe server:</p>
+<pre class="highlight"><code>$ scp id_rsa.pub &lt;user&gt;@sunfire.comp.nus.edu.sg:~/</code></pre>
+<p>Finally, login to <code>sunfire</code> and key in your password for the final time. Then
+within sunfire, check that your <code>id_rsa.pub</code> file is there and run the following
+command:</p>
+<pre class="highlight"><code>$ cat id_rsa.pub &gt;&gt; ~/.ssh/known_hosts</code></pre>
+<p>This saves your computers key to the node and allows you to have instant access
+everytime. Enjoy!</p></div>
         
         
     </div>

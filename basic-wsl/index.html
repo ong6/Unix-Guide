@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="All basic Unix commands">
     <meta name="author" content="Ooi Wei Tsang">
-    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/cheat-sheet/">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/basic-wsl/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     
-    <title>Jun Xiong's CheatSheet - Basic Unix for CS2030/S</title>
+    <title>Setup for Windows 10 - Basic Unix for CS2030/S</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -72,13 +72,13 @@
                 
                 
                 
-                    <li class="dropdown">
+                    <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                         
                             
-<li >
-    <a href="../wsl/">Setup for Windows 10</a>
+<li class="active">
+    <a href="./">Setup for Windows 10</a>
 </li>
 
                         
@@ -117,13 +117,25 @@
                         
                             
 <li >
-    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+    <a href="../basic-vim-intro/">4. Vim Basics</a>
 </li>
 
                         
                             
 <li >
-    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+    <a href="../basic-vim-practice/">5. Vim Practice</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-ssh/">6. SSH and Remote Access</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../tmux/">7. tmux</a>
 </li>
 
                         
@@ -132,8 +144,8 @@
                 
                 
                 
-                    <li class="active">
-                        <a href="./">Jun Xiong's CheatSheet</a>
+                    <li >
+                        <a href="../cheat-sheet/">Unix Cheat Sheet</a>
                     </li>
                 
                 
@@ -152,17 +164,17 @@
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../basic-vim-practice/">
+                        <a rel="prev" href="..">
                             <i class="fas fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="next" href="../extra/">
+                        <a rel="next" href="../mac/">
                             Next <i class="fas fa-arrow-right"></i>
                         </a>
                     </li>
                     <li>
-                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/cheat-sheet.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/basic-wsl.md"><i class="fab fa-github"></i> Edit on GitHub</a>
                     </li>
             </ul>
         </div>
@@ -174,73 +186,109 @@
         
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="first-level active"><a href="#cheatsheet">CheatSheet</a></li>
-            <li class="second-level"><a href="#terminal-commands">Terminal Commands</a></li>
+        <li class="first-level active"><a href="#setting-up-unix-computing-environment-on-windows-10-with-wsl">Setting Up Unix Computing Environment on Windows 10 with WSL</a></li>
+            <li class="second-level"><a href="#requirements">Requirements</a></li>
                 
-            <li class="second-level"><a href="#vim-commands-basics-not-included">Vim Commands (Basics not included)</a></li>
+            <li class="second-level"><a href="#installing-wsl-1">Installing WSL 1</a></li>
                 
-                <li class="third-level"><a href="#global-commands">Global Commands</a></li>
-                <li class="third-level"><a href="#editing-commands">Editing Commands</a></li>
-                <li class="third-level"><a href="#movement-commands-hjkl-left-down-up-right">Movement Commands (h,j,k,l left, down, up, right)</a></li>
-                <li class="third-level"><a href="#multiple-files">Multiple files</a></li>
-            <li class="second-level"><a href="#tmux">Tmux</a></li>
+                <li class="third-level"><a href="#step-1-enabling-wsl-on-windows-10-through-powershell">Step 1: Enabling WSL on Windows 10 through PowerShell</a></li>
+                <li class="third-level"><a href="#step-2-restart-your-computer">Step 2: Restart your computer</a></li>
+                <li class="third-level"><a href="#step-3-install-ubuntu">Step 3: Install Ubuntu</a></li>
+            <li class="second-level"><a href="#launching-wsl">Launching WSL</a></li>
+                
+            <li class="second-level"><a href="#getting-ready-to-install-tools">Getting ready to install tools</a></li>
+                
+            <li class="second-level"><a href="#windows-terminal">Windows Terminal</a></li>
                 
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
 
-<h1 id="cheatsheet">CheatSheet</h1>
-<p>This cheat sheet contains the commands that I use on a daily basis. The commands
-are explained in-depth in the notes section.</p>
-<h2 id="terminal-commands">Terminal Commands</h2>
-<p><strong><mark>Ctrl + c</mark></strong> -terminate the current running program</p>
-<p><strong><mark>Ctrl + z</mark></strong> -suspend the current running program</p>
-<p><strong><mark>fg</mark></strong> -bring back to foreground</p>
-<p><strong><mark>bg</mark></strong> -finish running in background</p>
-<p><strong><mark>cd</mark></strong> -change directory</p>
-<p><strong><mark>ls</mark></strong> -list content of a directory</p>
-<p><strong><mark>pwd</mark></strong> -print current working directory</p>
-<p><strong><mark>rm -rf</mark></strong> -delete directory (beware)</p>
-<p><strong><mark>mkdir</mark></strong> -make directory</p>
-<p><strong><mark>mv</mark></strong> -move or rename files</p>
-<p><strong><mark>cp</mark></strong> -copy files</p>
-<p><strong><mark>cat</mark></strong> -print content to screen</p>
-<p><strong><mark>tmux</mark></strong> -more explanation below</p>
-<h2 id="vim-commands-basics-not-included">Vim Commands (Basics not included)</h2>
-<p>All commands below are for normal mode.</p>
-<h3 id="global-commands">Global Commands</h3>
-<p><strong><mark>:q!</mark></strong> -quit, don't save</p>
-<p><strong><mark>:wq</mark></strong> -write and quit</p>
-<p><strong><mark>/word</mark></strong> -find word</p>
-<p><strong><mark>gg=G</mark></strong> -format all lines</p>
-<h3 id="editing-commands">Editing Commands</h3>
-<p><strong><mark>yy</mark></strong> -copy line</p>
-<p><strong><mark>dd</mark></strong> -delete line (works as a "cut" also)</p>
-<p><strong><mark>p</mark></strong> -paste line</p>
-<p><strong><mark>2yy</mark></strong> -copy 2 lines (can change number for more lines &amp; works with the
-other commands above too)</p>
-<h3 id="movement-commands-hjkl-left-down-up-right">Movement Commands (h,j,k,l left, down, up, right)</h3>
-<p><strong><mark>0</mark></strong> -jump to the start of the line</p>
-<p><strong><mark>$</mark></strong> -jump to the end of the line</p>
-<p><strong><mark>gg</mark></strong> -go to first line of document</p>
-<p><strong><mark>5gg</mark></strong> -go to line 5</p>
-<p><strong><mark>mv</mark></strong> -move or rename files</p>
-<h3 id="multiple-files">Multiple files</h3>
-<p><strong><mark>:e file</mark></strong> -edit file in new buffer</p>
-<p><strong><mark>:bn</mark></strong> -next buffer</p>
-<p><strong><mark>:bp</mark></strong> -previous buffer</p>
-<p><strong><mark>:bd</mark></strong> -delete buffer</p>
-<p><strong><mark>:ls</mark></strong> -list all buffers</p>
-<p><strong><mark>:sp file</mark></strong> -open a file in a new buffer and split window</p>
-<p><strong><mark>:vs file</mark></strong> -open a file in a new buffer and vertically split window</p>
-<p><strong><mark>Ctrl + wh</mark></strong> -move cursor to the left window (vertical split)</p>
-<p><strong><mark>Ctrl + wl</mark></strong> -move cursor to the right window (vertical split)</p>
-<p><strong><mark>Ctrl + wj</mark></strong> -move cursor to the window below (horizontal split)</p>
-<p><strong><mark>Ctrl + wk</mark></strong> -move cursor to the window above (horizontal split)</p>
-<p>Notice how changing the letter after <strong><mark>Ctrl + w + (h, j, k, l)</mark></strong> controls
-the direction you move your cursor to.</p>
-<h2 id="tmux">Tmux</h2>
-<p>In Progress</p></div>
+<h1 id="setting-up-unix-computing-environment-on-windows-10-with-wsl">Setting Up Unix Computing Environment on Windows 10 with WSL</h1>
+<p>WSL, or <em>Windows Subsystem for Linux</em>, is a subsystem that allows users to run a
+Unix computing environment within Windows 10. This is the recommended method for
+having a local Unix computing environment for your Windows 10 machine.</p>
+<p>There are two versions, WSL 1 and, a newer, WSL 2.</p>
+<p>For the Unix@Home workshop, it suffices for attendees to install WSL 1.</p>
+<h2 id="requirements">Requirements</h2>
+<p>Before you proceed with the instructions below, you need to make sure that:</p>
+<ul>
+<li>
+<p>You have 64-bit versions of Windows 10, version 1607 or higher
+  (<a href="https://support.microsoft.com/en-sg/help/13443/windows-which-version-am-i-running">Here is how you check</a>);</p>
+</li>
+<li>
+<p>You have administrator access to your Windows 10; And</p>
+</li>
+<li>
+<p>You have an SoC Unix account. You can
+  <a href="https://mysoc.nus.edu.sg/~newacct">create an SoC Unix account here</a>. For SoC
+  students, this username is something that sticks with you for the rest of your
+  SoC life -- so choose wisely.</p>
+</li>
+</ul>
+<h2 id="installing-wsl-1">Installing WSL 1</h2>
+<h3 id="step-1-enabling-wsl-on-windows-10-through-powershell">Step 1: Enabling WSL on Windows 10 through PowerShell</h3>
+<p>Before you install WSL 1, you need to first enable the "Windows Subsystem for
+Linux" feature by running the following command in PowerShell.</p>
+<pre class="highlight"><code class="language-PowerShell">dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart</code></pre>
+<p>You can achieve this step by:</p>
+<ul>
+<li>Hit <span class="keys"><kbd class="key-windows">Win</kbd></span> to open the Start menu, type <code>PowerShell</code>, then right-click on
+  Windows PowerShell, and click "Run as administrator"</li>
+<li>Copy the command above by selecting it and then hitting <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-c">C</kbd></span></li>
+<li>Go to your PowerShell window and paste the command above by hitting
+  <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-v">V</kbd></span>. Press enter if needed to run the command.</li>
+</ul>
+<h3 id="step-2-restart-your-computer">Step 2: Restart your computer</h3>
+<h3 id="step-3-install-ubuntu">Step 3: Install Ubuntu</h3>
+<p>After restarting your computer, go to the
+<a href="https://aka.ms/wslstore">Microsoft Store</a> and get
+<a href="https://www.microsoft.com/store/productId/9N9TNGVNDL3Q">Ubuntu</a>
+18.04 LTS.<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup></p>
+<p>Follow the on-screen instructions to install.</p>
+<p>When you are asked to create a user account and password, we suggest that you
+choose a Unix username that is that same as your SoC Unix username.</p>
+<h2 id="launching-wsl">Launching WSL</h2>
+<p>To launch WSL, you can hit <span class="keys"><kbd class="key-windows">Win</kbd><span>+</span><kbd class="key-r">R</kbd></span> and type in <code>Ubuntu</code> followed by <span class="keys"><kbd class="key-enter">Enter</kbd></span>.
+This should bring up the Unix command-line interface for you to interact with
+the Unix computing environment.</p>
+<h2 id="getting-ready-to-install-tools">Getting ready to install tools</h2>
+<p>Ubuntu comes with <code>apt</code> as the package manager, which is a convenient way to
+list, search, install, update, and uninstall software and libraries in WSL.</p>
+<p>After you have set up WSL, run the following:</p>
+<pre class="highlight"><code class="language-Bash">sudo apt update</code></pre>
+<p>What it does:</p>
+<ul>
+<li><code>apt</code> is a command to install, upgrade, search, and uninstall software and
+  other packages in Ubuntu.</li>
+<li><code>apt update</code> asks <code>apt</code> to obtain the latest list of available packages from
+  the Internet.</li>
+<li><code>sudo</code> performs <code>apt update</code> with a super-user's level permission. This
+  command may ask you to enter your password. (Note: super-user means
+  administrator in Unix).</li>
+</ul>
+<h2 id="windows-terminal">Windows Terminal</h2>
+<p>For windows, a great extension that all programmers should have is the Windows
+Terminal.</p>
+<p>Windows Terminal is a modern terminal application for users of command-line
+tools and shells like Command Prompt, PowerShell, and Windows Subsystem for
+Linux (WSL). Its main features include multiple tabs, panes, Unicode and UTF-8
+character support, a GPU accelerated text rendering engine, and the ability to
+create your own themes and customize text, colors, backgrounds, and shortcuts.</p>
+<p>To download and get started with windows terminal, click and follow the
+instructions on the following link:
+<a href="https://docs.microsoft.com/en-us/windows/terminal/get-started">https://docs.microsoft.com/en-us/windows/terminal/get-started</a></p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p>The latest Ubuntu 20.04 LTS is
+<a href="https://discourse.ubuntu.com/t/ubuntu-20-04-and-wsl-1/15291">reported</a>
+reported to be unstable on WSL 1.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
         
         
     </div>

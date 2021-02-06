@@ -78,7 +78,7 @@
                         
                             
 <li >
-    <a href="../wsl/">Setup for Windows 10</a>
+    <a href="../basic-wsl/">Setup for Windows 10</a>
 </li>
 
                         
@@ -117,13 +117,25 @@
                         
                             
 <li >
-    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+    <a href="../basic-vim-intro/">4. Vim Basics</a>
 </li>
 
                         
                             
 <li >
-    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+    <a href="../basic-vim-practice/">5. Vim Practice</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-ssh/">6. SSH and Remote Access</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../tmux/">7. tmux</a>
 </li>
 
                         
@@ -133,7 +145,7 @@
                 
                 
                     <li >
-                        <a href="../cheat-sheet/">Jun Xiong's CheatSheet</a>
+                        <a href="../cheat-sheet/">Unix Cheat Sheet</a>
                     </li>
                 
                 
@@ -178,59 +190,61 @@
         <div class="col-md-9" role="main">
 
 <h1 id="accessing-remote-shell">Accessing Remote Shell</h1>
-<p>So far, we have been accessing the Unix computing environment
-locally, on your laptop or desktop computer.</p>
-<p>Using the shell, however, opens up a whole new world -- you can
-now access a remote computer over the Internet using the same
-interface.</p>
+<p>So far, we have been accessing the Unix computing environment locally, on your
+laptop or desktop computer.</p>
+<p>Using the shell, however, opens up a whole new world -- you can now access a
+remote computer over the Internet using the same interface.</p>
 <p>Let's try this out, using one of the two remote servers:</p>
 <h3 id="sunfire">sunfire</h3>
-<p>A Unix computing server called <code>sunfire</code>, hosted by the
-School of Computing.  To access this, you need to have a
-SoC Unix Account.  If you do not have one yet, you can create
-a new account here: <a href="https://mysoc.nus.edu.sg/~newacct">https://mysoc.nus.edu.sg/~newacct</a></p>
-<p>After that, activate "General Unix Servers" and "The SoC
-Compute Cluster" in MySoC here: <a href="https://mysoc.nus.edu.sg/~myacct/services.cgi">https://mysoc.nus.edu.sg/~myacct/services.cgi</a></p>
-<p><code>sunfire</code> is a shared machine running Solaris.  </p>
+<p>A Unix computing server called <code>sunfire</code>, hosted by the School of Computing. To
+access this, you need to have a SoC Unix Account. If you do not have one yet,
+you can create a new account here: <a href="https://mysoc.nus.edu.sg/~newacct">https://mysoc.nus.edu.sg/~newacct</a></p>
+<p>After that, activate "General Unix Servers" and "The SoC Compute Cluster" in
+MySoC here: <a href="https://mysoc.nus.edu.sg/~myacct/services.cgi">https://mysoc.nus.edu.sg/~myacct/services.cgi</a></p>
+<p><code>sunfire</code> is a shared machine running Solaris.</p>
 <p>To log into <code>sunfire</code>, type:</p>
-<p><pre class="highlight"><code>$ ssh sunfire.comp.nus.edu.sg</code></pre>
-or
-<pre class="highlight"><code>$ ssh &lt;username&gt;@sunfire.comp.nus.edu.sg</code></pre></p>
-<p>The first option above assumes your SoC Unix account name is the same
-as your username on your local machine (Remember we advised you to
-choose the same username when you installed WSL?  This is why!). In
-the second option, we have to explicitly provide our user name.  For
-instance,
-<pre class="highlight"><code>$ ssh ooiwt@sunfire.comp.nus.edu.sg</code></pre></p>
-<p>These commands are too long to type so you could add an alias for this command into your <code>~/.bashrc</code>.</p>
+<pre class="highlight"><code>$ ssh sunfire.comp.nus.edu.sg</code></pre>
+<p>or</p>
+<pre class="highlight"><code>$ ssh &lt;username&gt;@sunfire.comp.nus.edu.sg</code></pre>
+<p>The first option above assumes your SoC Unix account name is the same as your
+username on your local machine (Remember we advised you to choose the same
+username when you installed WSL? This is why!). In the second option, we have to
+explicitly provide our user name. For instance,</p>
+<pre class="highlight"><code>$ ssh bob@sunfire.comp.nus.edu.sg</code></pre>
+<p>These commands are too long to type so you could add an alias for this command
+into your <code>~/.bashrc</code>.</p>
 <h3 id="sdforg">sdf.org</h3>
-<p>For those students who do not have a NUSNET or SoC account, as a
-backup, you can apply for an account at public access Unix system
-provided by the Super Dimension Fortress at <a href="http://www.sdf.org">http://www.sdf.org</a>.</p>
+<p>For those students who do not have a NUSNET or SoC account, as a backup, you can
+apply for an account at public access Unix system provided by the Super
+Dimension Fortress at <a href="http://www.sdf.org">http://www.sdf.org</a>.</p>
 <p>Once you receive your account, you can ssh into sdf.org by</p>
 <pre class="highlight"><code>$ ssh sdf.org</code></pre>
 <h2 id="secure-shell">Secure Shell</h2>
-<p><code>ssh</code> stands for secure shell.  It is called secure as it encrypts
-all communications between you and the remote server.  It is an
-efficient way to access a remote computer since only texts are
-transmitted, not graphics.</p>
-<p>The first time you access a remote computer using <code>ssh</code>, it will ask
-you a question, which looks sometimes like this:
+<p><code>ssh</code> stands for secure shell. It is called secure as it encrypts all
+communications between you and the remote server. It is an efficient way to
+access a remote computer since only texts are transmitted, not graphics.</p>
+<p>The first time you access a remote computer using <code>ssh</code>, it will ask you a
+question, which looks sometimes like this:</p>
 <pre class="highlight"><code>The authenticity of host 'sunfire (137.132.80.55)' can't be established.
 RSA key fingerprint is SHA256:UUyiI25neTV5AT/q3CJi0BAA4ztfo+7doi77bkzpLJ4.
-Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre></p>
-<p>Type <code>yes</code> then hit <span class="keys"><kbd class="key-enter">Enter</kbd></span>.  You won't be asked the same question
-again.</p>
-<p>Once you log in, you will be presented the same interface as you are
-used to -- a command prompt.  You can do everything that you have
-learned at this command prompt, with the only difference being you are
-doing it on a remote computer (aka remote <em>host</em>  or remote
-<em>server</em>).</p>
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+<p>Type <code>yes</code> then hit <span class="keys"><kbd class="key-enter">Enter</kbd></span>. You won't be asked the same question again.</p>
+<p>Once you log in, you will be presented the same interface as you are used to --
+a command prompt. You can do everything that you have learned at this command
+prompt, with the only difference being you are doing it on a remote computer
+(aka remote <em>host</em> or remote <em>server</em>).</p>
 <h2 id="transferring-files-back-and-forth">Transferring Files Back and Forth</h2>
-<p>Secure copy, or <code>scp</code>, is one way to transfer files between the remote host and your local computer for archiving or storage. Let's say you want to transfer jfk.txt from the current working directory to your remote directory, then, on your local computer, run:</p>
+<p>Secure copy, or <code>scp</code>, is one way to transfer files between the remote host and
+your local computer for archiving or storage. Let's say you want to transfer
+jfk.txt from the current working directory to your remote directory, then, on
+your local computer, run:</p>
 <pre class="highlight"><code>$ scp jfk.txt sunfire.comp.nus.edu.sg:~/</code></pre>
-<p><code>scp</code> behaves just like <code>cp</code>, except that we add <code>sunfire.comp.nus.edu.sg:</code> in front of a path (add <code>&lt;username&gt;@</code> as necessary) to indicate the name of the remote host to copy the files to.  The path <code>~/</code> now refers to the home directory on the remote host.</p>
-<p>If you have files with the same name in the remote directory, the files will be overwritten without warning. I have lost my code a few times due to <code>scp</code>.</p>
+<p><code>scp</code> behaves just like <code>cp</code>, except that we add <code>sunfire.comp.nus.edu.sg:</code> in
+front of a path (add <code>&lt;username&gt;@</code> as necessary) to indicate the name of the
+remote host to copy the files to. The path <code>~/</code> now refers to the home directory
+on the remote host.</p>
+<p>If you have files with the same name in the remote directory, the files will be
+overwritten without warning. I have lost my code a few times due to <code>scp</code>.</p>
 <p><code>scp</code> supports <code>-r</code> (recursive copy) as well.</p></div>
         
         

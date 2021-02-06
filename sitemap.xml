@@ -1,43 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://ong6.github.io/Unix-Guide/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://ong6.github.io/Unix-Guide/wsl/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <loc>https://ong6.github.io/Unix-Guide/basic-wsl/</loc>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://ong6.github.io/Unix-Guide/mac/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://ong6.github.io/Unix-Guide/basic-shell/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://ong6.github.io/Unix-Guide/basic-path-nav/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://ong6.github.io/Unix-Guide/basic-file-management/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://ong6.github.io/Unix-Guide/basic-vim-intro/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://ong6.github.io/Unix-Guide/basic-vim-practice/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://ong6.github.io/Unix-Guide/basic-ssh/</loc>
+     <lastmod>2021-02-06</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://ong6.github.io/Unix-Guide/tmux/</loc>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://ong6.github.io/Unix-Guide/cheat-sheet/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://ong6.github.io/Unix-Guide/extra/</loc>
-     <lastmod>2021-02-04</lastmod>
+     <lastmod>2021-02-06</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

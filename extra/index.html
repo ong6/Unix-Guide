@@ -78,7 +78,7 @@
                         
                             
 <li >
-    <a href="../wsl/">Setup for Windows 10</a>
+    <a href="../basic-wsl/">Setup for Windows 10</a>
 </li>
 
                         
@@ -117,13 +117,25 @@
                         
                             
 <li >
-    <a href="../basic-vim-intro/">4. Intro to Vim</a>
+    <a href="../basic-vim-intro/">4. Vim Basics</a>
 </li>
 
                         
                             
 <li >
-    <a href="../basic-vim-practice/">5. Hands on with Vim</a>
+    <a href="../basic-vim-practice/">5. Vim Practice</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-ssh/">6. SSH and Remote Access</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../tmux/">7. tmux</a>
 </li>
 
                         
@@ -133,7 +145,7 @@
                 
                 
                     <li >
-                        <a href="../cheat-sheet/">Jun Xiong's CheatSheet</a>
+                        <a href="../cheat-sheet/">Unix Cheat Sheet</a>
                     </li>
                 
                 
@@ -187,6 +199,8 @@
                 
             <li class="second-level"><a href="#vim-articles">Vim Articles</a></li>
                 
+            <li class="second-level"><a href="#tmux-guides">Tmux Guides</a></li>
+                
     </ul>
 </div></div>
         <div class="col-md-9" role="main">
@@ -194,10 +208,13 @@
 <h1 id="additional-resources">Additional Resources</h1>
 <h3 id="courses-elsewhere">Courses Elsewhere</h3>
 <ul>
-<li><a href="https://missing.csail.mit.edu/">The Missing Semester of Your CS Education</a> at MIT</li>
+<li><a href="https://missing.csail.mit.edu/">The Missing Semester of Your CS Education</a> at
+  MIT</li>
 <li><a href="https://www.cs.cmu.edu/~15131/f17/">Great Practical Ideas in CS</a> at CMU</li>
-<li><a href="https://swcarpentry.github.io/shell-novice/">The Unix Shell</a> by the Software Carpentry Foundation.</li>
-<li><a href="http://www.andrew.cmu.edu/user/haoxuany/vim/">The Vim Editor: Philosophy, Principles and Practice</a> at CMU</li>
+<li><a href="https://swcarpentry.github.io/shell-novice/">The Unix Shell</a> by the Software
+  Carpentry Foundation.</li>
+<li><a href="http://www.andrew.cmu.edu/user/haoxuany/vim/">The Vim Editor: Philosophy, Principles and Practice</a>
+  at CMU</li>
 </ul>
 <h3 id="computerphile-on-youtube-history-of-unix">Computerphile on YouTube: History of Unix</h3>
 <ul>
@@ -209,7 +226,8 @@
 <li><a href="https://www.commandlinefu.com/commands/browse/sort-by-votes">commandlinefu</a></li>
 <li><a href="https://www.explainshell.com">explainshell</a></li>
 <li><a href="https://tldr.ostera.io/">tldr</a>: better <code>man</code> pages.</li>
-<li><a href="https://www.vimfromscratch.com/articles/awesome-command-line-tools/">Modernized commandline utils</a> compiled by VimFromScratch.</li>
+<li><a href="https://www.vimfromscratch.com/articles/awesome-command-line-tools/">Modernized commandline utils</a>
+  compiled by VimFromScratch.</li>
 </ul>
 <h3 id="good-old-fashion-faq">(Good Old Fashion) FAQ</h3>
 <ul>
@@ -220,46 +238,98 @@
 <h3 id="vim-tutorials">Vim Tutorials</h3>
 <ul>
 <li><code>vimtutor</code>: Just run <code>vimtutor</code> on the command line</li>
-<li><a href="https://vimeo.com/53144573">Vim: Precision Editing at the Speed of Thought</a>: A talk by Drew Neil</li>
+<li><a href="https://vimeo.com/53144573">Vim: Precision Editing at the Speed of Thought</a>:
+  A talk by Drew Neil</li>
 <li><a href="https://www.vim-adventures.com">Vim Adventure</a>: An adventure game for
   learning <code>vim</code></li>
-<li><a href="http://vimcasts.org/episodes/archive/">Vim Casts</a>: Videos and
-  articles for teaching <code>vim</code></li>
+<li><a href="http://vimcasts.org/episodes/archive/">Vim Casts</a>: Videos and articles for
+  teaching <code>vim</code></li>
 <li><a href="http://derekwyatt.org/vim/tutorials/">Vim Video Tutorials</a> by Derek Wyatt</li>
 <li><a href="https://vimawesome.com/">Vim Awesome</a>: Directory of plugins.</li>
 </ul>
 <h3 id="vim-articles">Vim Articles</h3>
 <ul>
 <li>
-<p><a href="https://softwareengineering.stackexchange.com/questions/61738/time-to-drop-emacs-and-vi">Time to Drop Emacs and Vi?</a> on StackOverflow.  "<em>Programmers are notorious for using the tools that helps them get the job done in the most efficient way possible. These editors are ancient yet still being used because they are good, solid editors, proven by time. If they get the job done and get the job done well, why should we drop them in favor of something else?</em>"</p>
+<p><a href="https://softwareengineering.stackexchange.com/questions/61738/time-to-drop-emacs-and-vi">Time to Drop Emacs and Vi?</a>
+  on StackOverflow. "<em>Programmers are notorious for using the tools that helps
+  them get the job done in the most efficient way possible. These editors are
+  ancient yet still being used because they are good, solid editors, proven by
+  time. If they get the job done and get the job done well, why should we drop
+  them in favor of something else?</em>"</p>
 </li>
 <li>
-<p><a href="https://stackoverflow.com/questions/597077/what-are-the-benefits-of-learning-vim">What are the benefits of learning Vim?</a> on Stack Overflow.  "<em>Usually vim's killer features are considered: A) that it's available on pretty much every Unix you'll ever encounter and B) your fingers very rarely have to leave the home row, which means you'll be able to edit text very, very quickly. It's also usually very fast and lightweight even when editing huge files.</em>"</p>
+<p><a href="https://stackoverflow.com/questions/597077/what-are-the-benefits-of-learning-vim">What are the benefits of learning Vim?</a>
+  on Stack Overflow. "<em>Usually vim's killer features are considered: A) that
+  it's available on pretty much every Unix you'll ever encounter and B) your
+  fingers very rarely have to leave the home row, which means you'll be able to
+  edit text very, very quickly. It's also usually very fast and lightweight even
+  when editing huge files.</em>"</p>
 </li>
 <li>
-<p><a href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/">Learn <code>vim</code> Progressively</a> "<em>I suggest you teach yourself Vim in 4 steps: 1. Survive. 2.  Feel comfortable. 3.  Feel Better, Stronger, Faster. 4.  Use superpowers of vim</em>"</p>
+<p><a href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/">Learn <code>vim</code> Progressively</a>
+  "<em>I suggest you teach yourself Vim in 4 steps: 1. Survive. 2. Feel
+  comfortable. 3. Feel Better, Stronger, Faster. 4. Use superpowers of vim</em>"</p>
 </li>
 <li>
-<p><a href="https://twobithistory.org/2018/08/05/where-vim-came-from.html">Where Vim Came From</a> -- from TwoBitHistory.  "<em>Perhaps more importantly, while we’re asking questions, why does exiting Vim involve typing :wq? Sure, it’s a “write” operation followed by a “quit” operation, but that is not a particularly intuitive convention. Who decided that copying text should instead be called “yanking”? Why is :%s/foo/bar/gc short for “find and replace”? Vim’s idiosyncrasies seem too arbitrary to have been made up, but then where did they come from?"</em></p>
+<p><a href="https://twobithistory.org/2018/08/05/where-vim-came-from.html">Where Vim Came From</a>
+  -- from TwoBitHistory. "<em>Perhaps more importantly, while we’re asking
+  questions, why does exiting Vim involve typing :wq? Sure, it’s a “write”
+  operation followed by a “quit” operation, but that is not a particularly
+  intuitive convention. Who decided that copying text should instead be called
+  “yanking”? Why is :%s/foo/bar/gc short for “find and replace”? Vim’s
+  idiosyncrasies seem too arbitrary to have been made up, but then where did
+  they come from?"</em></p>
 </li>
 <li>
-<p><a href="https://medium.com/@mkozlows/why-atom-cant-replace-vim-433852f4b4d1">Vim's Big Idea</a> - by Mike Kozlowski. <em>"This philosophy of minimalist commands that can be composed together is the fundamental originating philosophy of Unix, and Vim exemplifies it like no other editor."</em></p>
+<p><a href="https://medium.com/@mkozlows/why-atom-cant-replace-vim-433852f4b4d1">Vim's Big Idea</a> -
+  by Mike Kozlowski. <em>"This philosophy of minimalist commands that can be
+  composed together is the fundamental originating philosophy of Unix, and Vim
+  exemplifies it like no other editor."</em></p>
 </li>
 <li>
-<p><a href="https://dispatches.artifexdeus.com/vim-pays-excellent-dividends-814241804984">VIM Pays Excellent Dividends</a> - by John Bjorn Nelson.  <em>"Being conservative, let’s say it makes you 5% more productive. More specifically — once your brain maps the keystrokes to muscle memory — it makes you 5% faster at completing the mundane tasks…the ones which dominate programming. That added productivity snowballs. It’s an extra twenty minutes a day to build or explore (or learn), that used to go to copy/paste-like operations."</em></p>
+<p><a href="https://dispatches.artifexdeus.com/vim-pays-excellent-dividends-814241804984">VIM Pays Excellent Dividends</a> -
+  by John Bjorn Nelson. <em>"Being conservative, let’s say it makes you 5% more
+  productive. More specifically — once your brain maps the keystrokes to muscle
+  memory — it makes you 5% faster at completing the mundane tasks…the ones which
+  dominate programming. That added productivity snowballs. It’s an extra twenty
+  minutes a day to build or explore (or learn), that used to go to
+  copy/paste-like operations."</em></p>
 </li>
 <li>
 <p><a href="http://dudarev.com/blog/powers-of-vim/">The Powers of VIM</a> - by Artem Dudarev</p>
 </li>
 <li>
-<p><a href="https://github.com/damassi/learn-vim/blob/master/README.md">The 11 Steps to Learning Vim</a> - by <a href="https://github.com/damassi">damassi</a>. <em>"Regardless of the initial confusion and difficulty in getting started, you're making your future developer self immensely more productive by diving in and taking the plunge. Seriously. I'm just a few weeks in right now and I can positively say that learning Vim has been the best work-related decision of my life. It's fun, and in the strangest of ways it makes you think better."</em></p>
+<p><a href="https://github.com/damassi/learn-vim/blob/master/README.md">The 11 Steps to Learning Vim</a> -
+  by <a href="https://github.com/damassi">damassi</a>. <em>"Regardless of the initial
+  confusion and difficulty in getting started, you're making your future
+  developer self immensely more productive by diving in and taking the plunge.
+  Seriously. I'm just a few weeks in right now and I can positively say that
+  learning Vim has been the best work-related decision of my life. It's fun, and
+  in the strangest of ways it makes you think better."</em></p>
 </li>
 <li>
-<p><a href="https://csswizardry.com/2014/06/vim-for-people-who-think-things-like-vim-are-weird-and-hard/">Vim for People Who Think Things like Vim and Weird and Hard</a> - by <a href="https://csswizardry.com/">Harry Roberts</a>. <em>"the fact that, yes, people still use an editor that is over 20 years old (in turn based on a tool from the 70s), and those people number in the hundreds of thousands, perhaps they might be onto something."</em></p>
+<p><a href="https://csswizardry.com/2014/06/vim-for-people-who-think-things-like-vim-are-weird-and-hard/">Vim for People Who Think Things like Vim and Weird and Hard</a> -
+  by <a href="https://csswizardry.com/">Harry Roberts</a>. <em>"the fact that, yes, people
+  still use an editor that is over 20 years old (in turn based on a tool from
+  the 70s), and those people number in the hundreds of thousands, perhaps they
+  might be onto something."</em></p>
 </li>
 <li>
-<p><a href="https://pascalprecht.github.io/posts/why-i-use-vim/">Why I use Vim</a> - Pascal Precht. "<em>once I was able to do some basic operations in Vim and actually started working again, I made almost as twice as much progress at work in about half the time. I know that sounds kind of crazy but I’m serious. And that convinced me that I made the right choice.<br><br>  So, do yourself a favor and climb that mountain. Just remember that you can slide down afterwards.</em>"</p>
+<p><a href="https://pascalprecht.github.io/posts/why-i-use-vim/">Why I use Vim</a> - Pascal
+  Precht. "<em>once I was able to do some basic operations in Vim and actually
+  started working again, I made almost as twice as much progress at work in
+  about half the time. I know that sounds kind of crazy but I’m serious. And
+  that convinced me that I made the right choice.<br><br> So, do yourself a
+  favor and climb that mountain. Just remember that you can slide down
+  afterwards.</em>"</p>
 </li>
+</ul>
+<h3 id="tmux-guides">Tmux Guides</h3>
+<ul>
+<li><a href="https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/">A Quick and Easy Guide to tmux</a> -
+  Ham Vocke</li>
+<li><a href="https://tmuxguide.readthedocs.io/en/latest/tmux/tmux.html">TMUX Commands</a> -
+  Shows the documentation for TMUX</li>
 </ul></div>
         
         
