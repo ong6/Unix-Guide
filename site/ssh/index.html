@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/ssh/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Accessing Remote Shell - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Vim Basics</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-practice/">5. Vim Practice</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-ssh/">6. SSH and Remote Access</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../tmux/">7. tmux</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../cheat-sheet/">Unix Cheat Sheet</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/ssh.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#accessing-remote-shell">Accessing Remote Shell</a></li>
+            <li class="second-level"><a href="#sunfire">sunfire</a></li>
+                
+            <li class="second-level"><a href="#sdforg">sdf.org</a></li>
+                
+            <li class="second-level"><a href="#secure-shell">Secure Shell</a></li>
+                
+            <li class="second-level"><a href="#transferring-files-back-and-forth">Transferring Files Back and Forth</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="accessing-remote-shell">Accessing Remote Shell</h1>
+<p>So far, we have been accessing the Unix computing environment locally, on your
+laptop or desktop computer.</p>
+<p>Using the shell, however, opens up a whole new world -- you can now access a
+remote computer over the Internet using the same interface.</p>
+<p>Let's try this out, using one of the two remote servers:</p>
+<h3 id="sunfire">sunfire</h3>
+<p>A Unix computing server called <code>sunfire</code>, hosted by the School of Computing. To
+access this, you need to have a SoC Unix Account. If you do not have one yet,
+you can create a new account here: <a href="https://mysoc.nus.edu.sg/~newacct">https://mysoc.nus.edu.sg/~newacct</a></p>
+<p>After that, activate "General Unix Servers" and "The SoC Compute Cluster" in
+MySoC here: <a href="https://mysoc.nus.edu.sg/~myacct/services.cgi">https://mysoc.nus.edu.sg/~myacct/services.cgi</a></p>
+<p><code>sunfire</code> is a shared machine running Solaris.</p>
+<p>To log into <code>sunfire</code>, type:</p>
+<pre class="highlight"><code>$ ssh sunfire.comp.nus.edu.sg</code></pre>
+<p>or</p>
+<pre class="highlight"><code>$ ssh &lt;username&gt;@sunfire.comp.nus.edu.sg</code></pre>
+<p>The first option above assumes your SoC Unix account name is the same as your
+username on your local machine (Remember we advised you to choose the same
+username when you installed WSL? This is why!). In the second option, we have to
+explicitly provide our user name. For instance,</p>
+<pre class="highlight"><code>$ ssh bob@sunfire.comp.nus.edu.sg</code></pre>
+<p>These commands are too long to type so you could add an alias for this command
+into your <code>~/.bashrc</code>.</p>
+<h3 id="sdforg">sdf.org</h3>
+<p>For those students who do not have a NUSNET or SoC account, as a backup, you can
+apply for an account at public access Unix system provided by the Super
+Dimension Fortress at <a href="http://www.sdf.org">http://www.sdf.org</a>.</p>
+<p>Once you receive your account, you can ssh into sdf.org by</p>
+<pre class="highlight"><code>$ ssh sdf.org</code></pre>
+<h2 id="secure-shell">Secure Shell</h2>
+<p><code>ssh</code> stands for secure shell. It is called secure as it encrypts all
+communications between you and the remote server. It is an efficient way to
+access a remote computer since only texts are transmitted, not graphics.</p>
+<p>The first time you access a remote computer using <code>ssh</code>, it will ask you a
+question, which looks sometimes like this:</p>
+<pre class="highlight"><code>The authenticity of host 'sunfire (137.132.80.55)' can't be established.
+RSA key fingerprint is SHA256:UUyiI25neTV5AT/q3CJi0BAA4ztfo+7doi77bkzpLJ4.
+Are you sure you want to continue connecting (yes/no/[fingerprint])?</code></pre>
+<p>Type <code>yes</code> then hit <span class="keys"><kbd class="key-enter">Enter</kbd></span>. You won't be asked the same question again.</p>
+<p>Once you log in, you will be presented the same interface as you are used to --
+a command prompt. You can do everything that you have learned at this command
+prompt, with the only difference being you are doing it on a remote computer
+(aka remote <em>host</em> or remote <em>server</em>).</p>
+<h2 id="transferring-files-back-and-forth">Transferring Files Back and Forth</h2>
+<p>Secure copy, or <code>scp</code>, is one way to transfer files between the remote host and
+your local computer for archiving or storage. Let's say you want to transfer
+jfk.txt from the current working directory to your remote directory, then, on
+your local computer, run:</p>
+<pre class="highlight"><code>$ scp jfk.txt sunfire.comp.nus.edu.sg:~/</code></pre>
+<p><code>scp</code> behaves just like <code>cp</code>, except that we add <code>sunfire.comp.nus.edu.sg:</code> in
+front of a path (add <code>&lt;username&gt;@</code> as necessary) to indicate the name of the
+remote host to copy the files to. The path <code>~/</code> now refers to the home directory
+on the remote host.</p>
+<p>If you have files with the same name in the remote directory, the files will be
+overwritten without warning. I have lost my code a few times due to <code>scp</code>.</p>
+<p><code>scp</code> supports <code>-r</code> (recursive copy) as well.</p></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

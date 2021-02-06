@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="All basic Unix commands">
+    <meta name="author" content="Ooi Wei Tsang">
+    <link rel="canonical" href="https://ong6.github.io/Unix-Guide/why-unix/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    
+    <title>Unit 1: Unix - Basic Unix for CS2030/S</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../css/base.min.css" rel="stylesheet">
+    <link href="../css/cinder.min.css" rel="stylesheet">
+
+     
+
+    
+    <link href="../css/ooiwt.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            <a class="navbar-brand" href="..">Basic Unix for CS2030/S</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Setup <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-wsl/">Setup for Windows 10</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../mac/">Setup for macOS</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Notes <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../basic-shell/">1. Terminal and Shell</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-path-nav/">2. Path and Navigation</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-file-management/">3. File Management</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-intro/">4. Vim Basics</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-vim-practice/">5. Vim Practice</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../basic-ssh/">6. SSH and Remote Access</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../tmux/">7. tmux</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../cheat-sheet/">Unix Cheat Sheet</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../extra/">Extra</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/ong6/Unix-Guide/edit/master/docs/why-unix.md"><i class="fab fa-github"></i> Edit on GitHub</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#unit-1-unix">Unit 1: Unix</a></li>
+            <li class="second-level"><a href="#history-of-unix">History of Unix</a></li>
+                
+            <li class="second-level"><a href="#why-learn-unix">Why Learn Unix?</a></li>
+                
+            <li class="second-level"><a href="#further-readings">Further Readings</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1 id="unit-1-unix">Unit 1: Unix</h1>
+<h2 id="history-of-unix">History of Unix</h2>
+<p>To understand what <em>Unix</em> is and to appreciate its
+importance, let's
+take a glimpse into the history book.</p>
+<p>Early computers, in the 1940s and early 1950s, do not have an
+operating system.  Every program will have to be designed specifically
+for a given hardware specification and only one program can run on
+the computer at one time.  To run a program, a user will have to
+carry a stack of punch cards or tapes into the computer room and
+load them into the computer at a scheduled time.</p>
+<p>As computers become more sophisticated and the demand to run
+programs on the machine increases, humans operators are hired to
+manage the requests to run the programs, and these human operators
+have to manually schedule and manage the time allocated to each
+program on the machine.</p>
+<p>These tasks are slowly being replaced by a layer of software that
+runs on the computers starting the late 1950s.  Termed <em>operating
+systems</em>, this system software helps to manage "which program runs
+when", and it includes more functionalities such as resource
+accounting (e.g., which user used how much time on the machine) and
+hardware management (e.g., hide the tedious operations of 
+interfacing with memory and storage from the programmer).</p>
+<p>One of the defining development in the 1960s is the idea of time
+sharing - allowing computer time to be shared by
+multiple users.  Time-sharing is revolutionary
+since users no longer have to queue or schedule a slotted time to run
+a program on a computer.  The early operating system that enables
+time-sharing, however, is complex, difficult to use, and bloated
+with features.</p>
+<p>Unix is an operating system that was developed in the late 1960s and 
+the early 1970s around this revolution, by Dennis Ritchie and Ken 
+Thompson from Bell Laboratories.  Learning from the mistakes of the
+past operating systems, the duo set to develop an operating system with <em>simplicity</em>
+and <em>elegance</em> at the core of its design.  Part of the push towards
+simplicity is also due to the lack of powerful computers in many 
+places at that time -- the design constraints have lead to design 
+decisions that favor economy.</p>
+<p><br><div align=center>
+<a title="Peter Hamer / CC BY-SA (https://creativecommons.org/licenses/by-sa/2.0)" href="https://commons.wikimedia.org/wiki/File:Ken_Thompson_(sitting)_and_Dennis_Ritchie_at_PDP-11_(2876612463).jpg"><img width="512" alt="Ken Thompson (sitting) and Dennis Ritchie at PDP-11 (2876612463)" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg/512px-Ken_Thompson_%28sitting%29_and_Dennis_Ritchie_at_PDP-11_%282876612463%29.jpg"></a>
+<br>Figure: Ken thompson (sitting) and Dennis Ritchie working in front of their computer.
+</div><br></p>
+<p>The simplicity and elegance has propelled the popularity of the Unix
+operating system, leading to over 600 installations reported by 1974<sup id="fnref:3"><a class="footnote-ref" href="#fn:3">3</a></sup>.</p>
+<p>Closely tied to the rise of Unix is the invention of C, a programming
+language that Dennis Ritchie and Ken Thompson used to write Unix in.
+This is revolutionary by itself, as programmers can then write tools
+and programs in a higher level structured language, rather than in 
+low-level assembly languages as in the operating systems before.</p>
+<p>As a result of this development, Unix is the first operating system
+where programmers can write and run a program on the fly in front of a
+terminal.  This ability leads to a plethora of contributions to Unix
+systems, utilities, and tools in the 1970s, fueling its popularity 
+among the developers.</p>
+<p>The ease of programming and its superiority in terms of simplicity
+has lead to the emergence of variants of the original Unix operating
+systems, developed by modifying the original Unix source code. 
+The Berkeley Software Distribution (BSD) is among the most important ones 
+(macOS is a descendant of BSD).  Another notable descendant from the
+original Unix is Solaris, from Sun Microsystem (now Oracle), which
+the School of Computing runs on its computing server (called <code>sunfire</code>).</p>
+<p>Another variant of Unix is Linux -- which interestingly is developed
+from scratch as a hobby initially by Linus Torvalds at the age of 21.
+Linux follows many of the principles of Unix but is not based on the 
+original Unix source code.</p>
+<p><br><div align="center">
+<a title="Eraserhead1, Infinity0, Sav_vas / CC BY-SA (https://creativecommons.org/licenses/by-sa/3.0)" href="https://commons.wikimedia.org/wiki/File:Unix_history-simple.svg"><img width="800" alt="Unix history-simple" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Unix_history-simple.svg/800px-Unix_history-simple.svg.png"></a>
+<br>Figure: Unix and Unix-like Operating Systems.
+</div><br></p>
+<p>While a majority of personal computers is still running Microsoft Windows 
+10 (88%), a vast majority of server software is running on some flavor 
+of Unix (&gt;70%)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>.  Almost all mobile phones are running on a variant of Unix 
+(iOS, Android).  Among software developers, more than half (53%) uses a 
+Unix-based OS on the primary work machines<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.  Microsoft, after years of
+competing with Unix-based OS, has started to embrace Unix-based systems
+and released the Windows Subsystems for Linux, allowing Windows users
+to run a sandboxed Linux subsystems within Windows.</p>
+<p>We collectively call these variants of operating systems and subsystems
+the <em>Unix computing environment</em>, which today includes all OS from Apple 
+(macOS, iOS, etc), Linux-based systems (Ubuntu, Android, etc), commercial
+servers (Oracle's Solaris, HP's HP-UX, IBM's AIX), and subsystems within
+Microsoft Windows 10.</p>
+<h2 id="why-learn-unix">Why Learn Unix?</h2>
+<p>There are several reasons:</p>
+<ul>
+<li>
+<p>Unix-based OS is the dominant operating system in the world, and
+as a computing student, you will likely have to interface
+with one sometime in your career.</p>
+</li>
+<li>
+<p>Unix design is rooted in its simplicity and economy.  It is
+probably the most <em>productive</em> programming environment you can have
+to do most of your day-to-day tasks and to develop software as a
+computing professional.</p>
+</li>
+<li>
+<p>Unix design is also rooted in its programmability.  If there is
+something that you wish to automate a task to improve your productivity,
+you can easily compose new tools from the existing ones.</p>
+</li>
+<li>
+<p>The Unix philosophy serves as a great example of how good 
+software should be designed: simple, do one thing well, 
+composable.</p>
+</li>
+</ul>
+<h2 id="further-readings">Further Readings</h2>
+<ul>
+<li><a href="http://www.catb.org/~esr/writings/taoup/html/ch02s01.html">The Art of Unix Programming: History of Unix</a>, by Eric Steven Raymond</li>
+</ul>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:1">
+<p><a href="https://insights.stackoverflow.com/survey/2020#development-environments-and-tools">Stack Overflow Developer Survey 2020</a>&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:2">
+<p><a href="https://en.wikipedia.org/wiki/Usage_share_of_operating_systems">Usage Share of OS</a>, by Wikipedia&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://people.eecs.berkeley.edu/~brewer/cs262/unix.pdf">The Unix Time Sharing System</a>, by Dennis Ritchie and Ken Thompson.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div></div>
+        
+        
+    </div>
+
+    <footer class="col-md-12 text-center">
+        
+        <hr>
+        <p>
+        <small>This content is licensed under <a href=http://creativecommons.org/licenses/by-nc-sa/4.0/>Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International</a> license.</small><br>
+        
+        <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+        </p>
+
+        
+        
+    </footer>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+
+      <!-- default is to include highlightjs -->
+    
+    
+
+    <script>var base_url = ".."</script>
+    
+        <script>var shortcuts = {"previous": 72, "next": 76, "search": 191}</script>
+    
+    <script src="../js/base.js"></script>
+    <script src="../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>
