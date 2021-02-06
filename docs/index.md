@@ -9,6 +9,12 @@ will need to speed up and make writing code on Unix systems a breeze.
 Refer to the notes before looking at the cheatsheet to get a basic understanding
 of Unix.
 
+## Objectives
+
+- To introduce students to using Unix-based computing environment for daily
+  computing tasks
+- To prepare students to be efficient in using Unix for their computing career
+
 ## Credit
 
 This guide was adapted and edited from the original guide:

@@ -24,15 +24,17 @@ shortcuts:
 nav:
   - Home: index.md
   - Setup:
-      - Setup for Windows 10: wsl.md
+      - Setup for Windows 10: basic-wsl.md
       - Setup for macOS: mac.md
   - Notes:
       - 1. Terminal and Shell: basic-shell.md
       - 2. Path and Navigation: basic-path-nav.md
       - 3. File Management: basic-file-management.md
-      - 4. Intro to Vim: basic-vim-intro.md
-      - 5. Hands on with Vim: basic-vim-practice.md
-  - Jun Xiong's CheatSheet: cheat-sheet.md
+      - 4. Vim Basics: basic-vim-intro.md
+      - 5. Vim Practice: basic-vim-practice.md
+      - 6. SSH and Remote Access: basic-ssh.md
+      - 7. tmux: tmux.md
+  - Unix Cheat Sheet: cheat-sheet.md
   - Extra: extra.md
 
 extra_css:
